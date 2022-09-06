@@ -45,8 +45,9 @@ namespace gissatalet
         public static int tempUserScore;
         public static void Meny(Boolean gameOn)
         {
-            
-
+            Console.WriteLine("# [1] Starta ett nytt spel");
+            Console.WriteLine("# [2] Se aktuellt Highscore");
+            Console.WriteLine("# [3] Avsluta");
         }
         public static void NewGame() 
         {
@@ -58,9 +59,11 @@ namespace gissatalet
             {
                 if (userList.Contains(user)) 
                 {
-                    int tempUserScore = userList.IndexOf(user);
+                    int tempUserIndex = userList.IndexOf(user);
                     string userBack = string.Format("Du {0} har {1} poäng!", user, tempUserScore);
                     Console.WriteLine(userBack);
+                    int score = 1;
+                    userScore[tempUserIndex] += score;
                 }
             }
 
@@ -70,7 +73,27 @@ namespace gissatalet
         }
         public static void Highscore() 
         {
-            
+            if (userList.Count == 0) 
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    userList.Add(String.Format("User {0}", i));
+                    userScore.Add(i);
+                }
+            }
+            foreach (var user in userList) 
+            {
+                int tempScoreIndex = userList.IndexOf(user);
+
+                List<string> highscore = new List<string>();
+                highscore.Add(user + " " + tempScoreIndex);
+                highscore.Sort();
+                foreach (var item in highscore) 
+                {
+                    Console.WriteLine(highscore);
+                }
+            }
         }
+
     }
 }
