@@ -1,23 +1,30 @@
-﻿namespace gissatalet
+﻿using System.Net;
+
+namespace gissatalet
 {
     internal class Program
     {
-        public static List<string> userList = new List<string>();
-        public static List<int> userScore = new List<int>();
+        public static List<string> userList = new();
+        public static List<int> userScore = new();
         public static int tempUserScore;
         public static int Xpos = 13;
+        public static string fontPath = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "font.flf)");
+        private static Stream fontStream;
+
         public static void Init() { Xpos = 13; Console.Clear(); }
-        public static WindowWidth windowWidth = new WindowWidth();
+        public static WindowWidth windowWidth = new();
         public static string space = "                                                                                    ";
         static void Main(string[] args)
         {
+            WebClient client = new();
+            File.WriteAllText(fontPath, client.DownloadString("https://raw.githubusercontent.com/xero/figlet-fonts/master/Bloody.flf"));
             bool startaSpel = true;
             while (startaSpel == true)
             {
                 Titel();
                 Meny();
                 string makeAMove = "Gör ett val: ";
-                setXandWrite(makeAMove, 5);
+                SetXandWrite(makeAMove, 5);
                 string userValue = Console.ReadLine();
                 if (userValue == "1")
                 {
@@ -42,31 +49,30 @@
             string optionOne = string.Format("1) Spela Gissa Talet!");
             string optionTwo = string.Format("2) Se Highscore!");
             string optionThree = string.Format("3) Avsluta :(");
-            setXandWrite(optionOne,1);
-            setXandWrite(optionTwo,2);
-            setXandWrite(optionThree,3);
+            SetXandWrite(optionOne,1);
+            SetXandWrite(optionTwo,2);
+            SetXandWrite(optionThree,3);
         }
         public static void NewGame()
         {
-            string title = @" 
-                         ███▄    █ ▓█████  █     █░     ▄████  ▄▄▄       ███▄ ▄███▓▓█████  ▐██▌ 
-                         ██ ▀█   █ ▓█   ▀ ▓█░ █ ░█░    ██▒ ▀█▒▒████▄    ▓██▒▀█▀ ██▒▓█   ▀  ▐██▌ 
-                        ▓██  ▀█ ██▒▒███   ▒█░ █ ░█    ▒██░▄▄▄░▒██  ▀█▄  ▓██    ▓██░▒███    ▐██▌ 
-                        ▓██▒  ▐▌██▒▒▓█  ▄ ░█░ █ ░█    ░▓█  ██▓░██▄▄▄▄██ ▒██    ▒██ ▒▓█  ▄  ▓██▒ 
-                        ▒██░   ▓██░░▒████▒░░██▒██▓    ░▒▓███▀▒ ▓█   ▓██▒▒██▒   ░██▒░▒████▒ ▒▄▄  
-                        ░ ▒░   ▒ ▒ ░░ ▒░ ░░ ▓░▒ ▒      ░▒   ▒  ▒▒   ▓▒█░░ ▒░   ░  ░░░ ▒░ ░ ░▀▀▒ 
-                        ░ ░░   ░ ▒░ ░ ░  ░  ▒ ░ ░       ░   ░   ▒   ▒▒ ░░  ░      ░ ░ ░  ░ ░  ░ 
-                           ░   ░ ░    ░     ░   ░     ░ ░   ░   ░   ▒   ░      ░      ░       ░ 
-                                 ░    ░  ░    ░             ░       ░  ░       ░      ░  ░ ░    ";
-            Console.ForegroundColor = ConsoleColor.DarkRed; Console.WriteLine(title);
+            fontStream = new FileStream(fontPath, FileMode.Open, FileAccess.Read);
+            var font = new WenceyWang.FIGlet.FIGletFont(fontStream);
+            var text = new WenceyWang.FIGlet.AsciiArt("        NEW GAME!", font: font);
+            text.ToString(); var result = text.Result;
+            Console.WriteLine(space);
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            for (int i = 0; i < result.Length; i++)
+            {
+                Console.WriteLine(result[i]);
+            }
             Console.ForegroundColor = ConsoleColor.White;
             bool nyttSpel = true;
-            Random slump = new Random();
+            Random slump = new();
             string input = "Nu startas ett spel skriv ditt namn";
-            setXandWrite(input);
-            setXandWrite("> ", 1);
+            SetXandWrite(input);
+            SetXandWrite("> ", 1);
             string name = Console.ReadLine();
-            setXandWrite(space);
+            SetXandWrite(space);
             int slumpTal = slump.Next(1, 11);
             while (nyttSpel == true)
             {
@@ -86,12 +92,12 @@
                     score = userScore[tempUserIndex];
                 }
                 string userBack = string.Format("Du {0} har {1} poäng!", userList[tempUserIndex], score);
-                setXandWrite(userBack, 5);
-                setXandWrite(space);
+                SetXandWrite(userBack, 5);
+                SetXandWrite(space);
                 string gissaText = "Gissa ett nummer mellan 1 - 10";
-                setXandWrite(gissaText);
-                setXandWrite(space, 1);
-                setXandWrite(prompt, 1)
+                SetXandWrite(gissaText);
+                SetXandWrite(space, 1);
+                SetXandWrite(prompt, 1);
                 int gissning = 0;
                 string aGissning = Console.ReadLine();
                 try 
@@ -101,61 +107,59 @@
                 catch (FormatException) 
                 {
                     string error = "Du måste skriva in ett nummer!";
-                    setXandWrite(error,3);
+                    SetXandWrite(error,3);
                 }
                 if (gissning == slumpTal)
                 {
                     slumpTal = slump.Next(1, 11);
                     string correct = "Du gissade rätt!";
                     string press = "Tryck på (N) för att avsluta eller, Tryck på valfri tangent för att fortsätta.";
-                    setXandWrite(space, -1);
-                    setXandWrite(correct, -1);
-                    setXandWrite(press);
-                    setXandWrite(prompt, 1);
+                    SetXandWrite(space, -1);
+                    SetXandWrite(correct, -1);
+                    SetXandWrite(press);
+                    SetXandWrite(prompt, 1);
                     string yN = Console.ReadLine().ToLower();
                     ++score;
                     userScore.Insert(tempUserIndex, score);
-                    setXandWrite(space);
+                    SetXandWrite(space);
                     if (yN == "n") nyttSpel = false;
                     else 
                     {
-                        setXandWrite(space, -1);
-                        setXandWrite(space);
+                        SetXandWrite(space, -1);
+                        SetXandWrite(space);
                     }
                 }
 
                 else if (gissning < slumpTal)
                 {   
                     string guessLow = "Du gissade lägre än talet.";
-                    setXandWrite(space, -1);
-                    setXandWrite(guessLow, -1);
+                    SetXandWrite(space, -1);
+                    SetXandWrite(guessLow, -1);
                 }
 
                 else
                 {
                     string guessHigh = "Du gissade högre än talet.";
-                    setXandWrite(space, -1);
-                    setXandWrite(guessHigh, -1);
+                    SetXandWrite(space, -1);
+                    SetXandWrite(guessHigh, -1);
                 }
             }
             Console.WriteLine();
         }
         public static void Highscore()
         {
-            string title = @"
-                        ██░ ██  ██▓  ▄████  ██░ ██   ██████  ▄████▄   ▒█████   ██▀███  ▓█████  ▐██▌ 
-                       ▓██░ ██▒▓██▒ ██▒ ▀█▒▓██░ ██▒▒██    ▒ ▒██▀ ▀█  ▒██▒  ██▒▓██ ▒ ██▒▓█   ▀  ▐██▌ 
-                       ▒██▀▀██░▒██▒▒██░▄▄▄░▒██▀▀██░░ ▓██▄   ▒▓█    ▄ ▒██░  ██▒▓██ ░▄█ ▒▒███    ▐██▌ 
-                       ░▓█ ░██ ░██░░▓█  ██▓░▓█ ░██   ▒   ██▒▒▓▓▄ ▄██▒▒██   ██░▒██▀▀█▄  ▒▓█  ▄  ▓██▒ 
-                       ░▓█▒░██▓░██░░▒▓███▀▒░▓█▒░██▓▒██████▒▒▒ ▓███▀ ░░ ████▓▒░░██▓ ▒██▒░▒████▒ ▒▄▄  
-                        ▒ ░░▒░▒░▓   ░▒   ▒  ▒ ░░▒░▒▒ ▒▓▒ ▒ ░░ ░▒ ▒  ░░ ▒░▒░▒░ ░ ▒▓ ░▒▓░░░ ▒░ ░ ░▀▀▒ 
-                        ▒ ░▒░ ░ ▒ ░  ░   ░  ▒ ░▒░ ░░ ░▒  ░ ░  ░  ▒     ░ ▒ ▒░   ░▒ ░ ▒░ ░ ░  ░ ░  ░ 
-                        ░  ░░ ░ ▒ ░░ ░   ░  ░  ░░ ░░  ░  ░  ░        ░ ░ ░ ▒    ░░   ░    ░       ░ 
-                        ░  ░  ░ ░        ░  ░  ░  ░      ░  ░ ░          ░ ░     ░        ░  ░ ░    
-                                            ░                                                      ";
-            Console.ForegroundColor = ConsoleColor.DarkRed; Console.WriteLine(title);
+            fontStream = new FileStream(fontPath, FileMode.Open, FileAccess.Read);
+            var font = new WenceyWang.FIGlet.FIGletFont(fontStream);
+            var text = new WenceyWang.FIGlet.AsciiArt("       HighScore!", font: font);
+            text.ToString(); var result = text.Result;
+            Console.WriteLine(space);
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            for (int i = 0; i < result.Length; i++)
+            {
+                Console.WriteLine(@result[i]);
+            }
             Console.ForegroundColor = ConsoleColor.White;
-            List<string> highScore = new List<string>();
+            List<string> highScore = new();
             if (userList.Count == 0) 
             {
                 userList.Add("Local Extremum");
@@ -175,31 +179,31 @@
             highScore.Sort();
             highScore.Reverse();
             string description = "POÄNG | NAMN";
-            setXandWrite(description);
+            SetXandWrite(description);
+            int next = 1;
             foreach (var user in highScore) 
             {
-                ++Xpos;
-                setXandWrite(user, ++Xpos);
+                ++next;
+                SetXandWrite(user, ++next);
             }
             string pressAny = "Tryck på valfri knapp för att återgå till huvudmenyn.";
-            setXandWrite(pressAny, 5);
+            SetXandWrite(pressAny, 13);
             Console.ReadLine();
         }
         public static void Titel()
         {
             Console.Clear();
+            fontStream = new FileStream(fontPath, FileMode.Open, FileAccess.Read);
+            var font = new WenceyWang.FIGlet.FIGletFont(fontStream);
+            var text = new WenceyWang.FIGlet.AsciiArt("      Gissa Talet", font: font);
+            text.ToString(); var result = text.Result;
+            Console.WriteLine(space);
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            string titel = @"
-                  ▄████  ██▓  ██████   ██████  ▄▄▄         ▄▄▄█████▓ ▄▄▄       ██▓    ▓█████▄▄▄█████▓
-                 ██▒ ▀█▒▓██▒▒██    ▒ ▒██    ▒ ▒████▄       ▓  ██▒ ▓▒▒████▄    ▓██▒    ▓█   ▀▓  ██▒ ▓▒
-                ▒██░▄▄▄░▒██▒░ ▓██▄   ░ ▓██▄   ▒██  ▀█▄     ▒ ▓██░ ▒░▒██  ▀█▄  ▒██░    ▒███  ▒ ▓██░ ▒░
-                ░▓█  ██▓░██░  ▒   ██▒  ▒   ██▒░██▄▄▄▄██    ░ ▓██▓ ░ ░██▄▄▄▄██ ▒██░    ▒▓█  ▄░ ▓██▓ ░ 
-                ░▒▓███▀▒░██░▒██████▒▒▒██████▒▒ ▓█   ▓██▒     ▒██▒ ░  ▓█   ▓██▒░██████▒░▒████▒ ▒██▒ ░ 
-                 ░▒   ▒ ░▓  ▒ ▒▓▒ ▒ ░▒ ▒▓▒ ▒ ░ ▒▒   ▓▒█░     ▒ ░░    ▒▒   ▓▒█░░ ▒░▓  ░░░ ▒░ ░ ▒ ░░   
-                  ░   ░  ▒ ░░ ░▒  ░ ░░ ░▒  ░ ░  ▒   ▒▒ ░       ░      ▒   ▒▒ ░░ ░ ▒  ░ ░ ░  ░   ░    
-                ░ ░   ░  ▒ ░░  ░  ░  ░  ░  ░    ░   ▒        ░        ░   ▒     ░ ░      ░    ░      
-                      ░  ░        ░        ░        ░  ░                  ░  ░    ░  ░   ░  ░        ";
-            Console.WriteLine(titel);
+            for (int i = 0; i < result.Length; i++)
+            {
+                Console.WriteLine(result[i]);
+            }
+            Console.ForegroundColor = ConsoleColor.White;
         }
         public class WindowWidth
         {
@@ -220,12 +224,12 @@
                 return Xpos + (yneg);
             }
         }
-        public static void setXandWrite(string setWord)    
+        public static void SetXandWrite(string setWord)    
         {
             Console.SetCursorPosition(windowWidth.SetWidth(setWord), windowWidth.SetXpos());
             Console.Write(setWord);
         }
-        public static void setXandWrite(string setWord, int setNewXpos)    
+        public static void SetXandWrite(string setWord, int setNewXpos)    
         {
             Console.SetCursorPosition(windowWidth.SetWidth(setWord), windowWidth.SetXpos(setNewXpos));
             Console.Write(setWord);
