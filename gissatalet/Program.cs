@@ -160,7 +160,7 @@ namespace gissatalet
             }
             Console.ForegroundColor = ConsoleColor.White;
             List<string> highScore = new();
-            if (userList.Count == 0) 1;
+            if (userList.Count == 0) 
             {
                 userList.Add("Local Extremum");
                 userScore.Add(3);
