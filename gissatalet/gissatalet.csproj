@@ -7,4 +7,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FIGlet.Net" Version="1.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ScrapeLib">
+      <HintPath>..\..\..\ovning19\ScrapeLib\obj\Debug\ScrapeLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
