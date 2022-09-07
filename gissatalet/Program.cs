@@ -80,9 +80,9 @@
 
             userList.Add("Tony");
             userScore.Add(3);
+            int slumpTal = slump.Next(1, 11);
             while (nyttSpel == true)
             {
-                int slumpTal = slump.Next(1, 11);
                 int tempUserIndex;
                 int score;
                 if (userList.Contains(name))
@@ -123,6 +123,7 @@
                 }
                 if (gissning == slumpTal)
                 {
+                    slumpTal = slump.Next(1, 11);
                     string correct = "Du gissade rätt!";
                     string press = "Tryck på (N) för att avsluta eller, Tryck på valfri tangent för att fortsätta.";
                     Console.SetCursorPosition(windowWidth.SetWidth(gissaText), windowWidth.SetXpos(-1));
