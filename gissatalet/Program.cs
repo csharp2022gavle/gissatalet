@@ -17,8 +17,7 @@
                 Titel();
                 Meny();
                 string makeAMove = "Gör ett val: ";
-                Console.SetCursorPosition(windowWidth.SetWidth(makeAMove, Xpos);
-                Console.Write(makeAMove);
+                setXandWrite(makeAMove, 5);
                 string userValue = Console.ReadLine();
                 if (userValue == "1")
                 {
@@ -39,17 +38,13 @@
         }
         public static void Meny()
         {
-            Xpos = 13;
             Console.ForegroundColor = ConsoleColor.White;
             string optionOne = string.Format("1) Spela Gissa Talet!");
             string optionTwo = string.Format("2) Se Highscore!");
             string optionThree = string.Format("3) Avsluta :(");
-            Console.SetCursorPosition(windowWidth.SetWidth(optionOne), windowWidth.SetXpos(1));
-            Console.Write(optionOne);
-            Console.SetCursorPosition(windowWidth.SetWidth(optionTwo), windowWidth.SetXpos(2));
-            Console.Write(optionTwo);
-            Console.SetCursorPosition(windowWidth.SetWidth(optionThree), windowWidth.SetXpos(3));
-            Console.Write(optionThree);
+            setXandWrite(optionOne,1);
+            setXandWrite(optionTwo,2);
+            setXandWrite(optionThree,3);
         }
         public static void NewGame()
         {
@@ -68,18 +63,16 @@
             bool nyttSpel = true;
             Random slump = new Random();
             string input = "Nu startas ett spel skriv ditt namn";
-            Console.SetCursorPosition(windowWidth.SetWidth(input), Xpos);
-            Console.Write(input);
-            Console.SetCursorPosition(windowWidth.MaxWidth(), Xpos+1);
-            Console.Write("> ");
+            setXandWrite(input);
+            setXandWrite("> ", 1);
             string name = Console.ReadLine();
-            Console.SetCursorPosition(windowWidth.SetWidth(input), Xpos);
-            Console.Write(space);
+            setXandWrite(space);
             int slumpTal = slump.Next(1, 11);
             while (nyttSpel == true)
             {
                 int tempUserIndex;
                 int score;
+                string prompt = "> ";
                 if (userList.Contains(name))
                 {
                     tempUserIndex = userList.FindIndex(a => a.Contains(name));
@@ -93,17 +86,12 @@
                     score = userScore[tempUserIndex];
                 }
                 string userBack = string.Format("Du {0} har {1} poäng!", userList[tempUserIndex], score);
-                Console.SetCursorPosition(windowWidth.SetWidth(userBack), windowWidth.SetXpos(5));
-                Console.Write(userBack);
-                Console.SetCursorPosition(windowWidth.MaxWidth(), windowWidth.SetXpos(1));
-                Console.Write(space);
+                setXandWrite(userBack, 5);
+                setXandWrite(space);
                 string gissaText = "Gissa ett nummer mellan 1 - 10";
-                Console.SetCursorPosition(windowWidth.SetWidth(gissaText), windowWidth.SetXpos());
-                Console.Write(space);
-                Console.SetCursorPosition(windowWidth.SetWidth(gissaText), windowWidth.SetXpos());
-                Console.Write(gissaText);
-                Console.SetCursorPosition(windowWidth.MaxWidth(), windowWidth.SetXpos(1));
-                Console.Write("> ");
+                setXandWrite(gissaText);
+                setXandWrite(space, 1);
+                setXandWrite(prompt, 1)
                 int gissning = 0;
                 string aGissning = Console.ReadLine();
                 try 
@@ -113,53 +101,41 @@
                 catch (FormatException) 
                 {
                     string error = "Du måste skriva in ett nummer!";
-                    Console.SetCursorPosition(windowWidth.SetWidth(error), windowWidth.SetXpos(3));
-                    Console.Write(error);
+                    setXandWrite(error,3);
                 }
                 if (gissning == slumpTal)
                 {
                     slumpTal = slump.Next(1, 11);
                     string correct = "Du gissade rätt!";
                     string press = "Tryck på (N) för att avsluta eller, Tryck på valfri tangent för att fortsätta.";
-                    Console.SetCursorPosition(windowWidth.SetWidth(gissaText), windowWidth.SetXpos(-1));
-                    Console.Write(space);
-                    Console.SetCursorPosition(windowWidth.SetWidth(correct), windowWidth.SetXpos(-1));
-                    Console.Write(correct);
-                    Console.SetCursorPosition(windowWidth.SetWidth(press), windowWidth.SetXpos());
-                    Console.Write(press);
-                    Console.SetCursorPosition(windowWidth.MaxWidth(), windowWidth.SetXpos(1));
-                    Console.Write("> ");
+                    setXandWrite(space, -1);
+                    setXandWrite(correct, -1);
+                    setXandWrite(press);
+                    setXandWrite(prompt, 1);
                     string yN = Console.ReadLine().ToLower();
                     ++score;
                     userScore.Insert(tempUserIndex, score);
-                    Console.SetCursorPosition(windowWidth.SetWidth(press), windowWidth.SetXpos());
-                    Console.Write(space);
+                    setXandWrite(space);
                     if (yN == "n") nyttSpel = false;
                     else 
                     {
-                        Console.SetCursorPosition(windowWidth.SetWidth(correct), windowWidth.SetXpos(-1));
-                        Console.Write(space);
-                        Console.SetCursorPosition(windowWidth.SetWidth(correct), windowWidth.SetXpos());
-                        Console.Write(space);
+                        setXandWrite(space, -1);
+                        setXandWrite(space);
                     }
                 }
 
                 else if (gissning < slumpTal)
                 {   
                     string guessLow = "Du gissade lägre än talet.";
-                    Console.SetCursorPosition((windowWidth.MaxWidth()), Xpos-1);
-                    Console.Write(space);
-                    Console.SetCursorPosition(windowWidth.SetWidth(guessLow), windowWidth.SetXpos(-1));
-                    Console.Write(guessLow);
+                    setXandWrite(space, -1);
+                    setXandWrite(guessLow, -1);
                 }
 
                 else
                 {
                     string guessHigh = "Du gissade högre än talet.";
-                    Console.SetCursorPosition(windowWidth.MaxWidth(), windowWidth.SetXpos(-1));
-                    Console.Write(space);
-                    Console.SetCursorPosition(windowWidth.SetWidth(guessHigh), windowWidth.SetXpos(-1));
-                    Console.WriteLine(guessHigh);
+                    setXandWrite(space, -1);
+                    setXandWrite(guessHigh, -1);
                 }
             }
             Console.WriteLine();
@@ -199,20 +175,16 @@
             highScore.Sort();
             highScore.Reverse();
             string description = "POÄNG | NAMN";
-            Console.SetCursorPosition(windowWidth.SetWidth(description), windowWidth.SetXpos());
-            Console.Write(description);
+            setXandWrite(description);
             foreach (var user in highScore) 
             {
                 ++Xpos;
-                Console.SetCursorPosition(windowWidth.SetWidth(user), ++Xpos);
-                Console.Write(user);
+                setXandWrite(user, ++Xpos);
             }
             string pressAny = "Tryck på valfri knapp för att återgå till huvudmenyn.";
-            Console.SetCursorPosition(windowWidth.SetWidth(pressAny), windowWidth.SetXpos(5));
-            Console.Write(pressAny);
+            setXandWrite(pressAny, 5);
             Console.ReadLine();
         }
-
         public static void Titel()
         {
             Console.Clear();
@@ -247,6 +219,16 @@
             {
                 return Xpos + (yneg);
             }
+        }
+        public static void setXandWrite(string setWord)    
+        {
+            Console.SetCursorPosition(windowWidth.SetWidth(setWord), windowWidth.SetXpos());
+            Console.Write(setWord);
+        }
+        public static void setXandWrite(string setWord, int setNewXpos)    
+        {
+            Console.SetCursorPosition(windowWidth.SetWidth(setWord), windowWidth.SetXpos(setNewXpos));
+            Console.Write(setWord);
         }
     }
 }
