@@ -53,7 +53,7 @@
             Console.SetCursorPosition(windowWidth.SetWidth(optionThree), windowWidth.SetXpos(3));
             Console.Write(optionThree);
         }
-        public static void NewGame()
+        public static async void NewGame()
         {
             string title = @" 
                          ███▄    █ ▓█████  █     █░     ▄████  ▄▄▄       ███▄ ▄███▓▓█████  ▐██▌ 
@@ -93,6 +93,8 @@
                 else 
                 {
                     userList.Add(name);
+                    //Lägger till namnet som angavs till en txt fil
+                    ToFile(name);
                     userScore.Add(0);
                     tempUserIndex = userList.Count()-1;
                     score = userScore[tempUserIndex];
@@ -219,6 +221,20 @@
             Console.SetCursorPosition(windowWidth.SetWidth(pressAny), windowWidth.SetXpos(5));
             Console.Write(pressAny);
             Console.ReadLine();
+        }
+        public static void ToFile(string name)
+        {
+            string path = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "Spelare.txt");
+
+            if (!File.Exists(path))
+            {
+                string createText = "Välkommen till Gissa Talets användarlista!" + Environment.NewLine;
+                File.WriteAllText(path, createText);
+
+            }
+
+            string appendText = name + Environment.NewLine;
+            File.AppendAllText(path, appendText);
         }
 
         public static void Titel()
