@@ -8,6 +8,7 @@
         public static int Xpos = 13;
         public static void Init() { Xpos = 13; Console.Clear(); }
         public static WindowWidth windowWidth = new WindowWidth();
+        public string space = "                                                                                    ";
         static void Main(string[] args)
         {
             bool startaSpel = true;
@@ -76,7 +77,7 @@
             Console.Write("> ");
             string name = Console.ReadLine();
             Console.SetCursorPosition(windowWidth.SetWidth(input), Xpos);
-            Console.Write("                                                 ");
+            Console.Write(space);
 
             userList.Add("Tony");
             userScore.Add(3);
@@ -101,10 +102,10 @@
                 Console.SetCursorPosition(windowWidth.SetWidth(userBack), windowWidth.SetXpos(5));
                 Console.Write(userBack);
                 Console.SetCursorPosition(windowWidth.MaxWidth(), windowWidth.SetXpos(1));
-                Console.Write("                                                                        ");
+                Console.Write(space);
                 string gissaText = "Gissa ett nummer mellan 1 - 10";
                 Console.SetCursorPosition(windowWidth.SetWidth(gissaText), windowWidth.SetXpos());
-                Console.Write("                                              ");
+                Console.Write(space);
                 Console.SetCursorPosition(windowWidth.SetWidth(gissaText), windowWidth.SetXpos());
                 Console.Write(gissaText);
                 Console.SetCursorPosition(windowWidth.MaxWidth(), windowWidth.SetXpos(1));
@@ -127,7 +128,7 @@
                     string correct = "Du gissade rätt!";
                     string press = "Tryck på (N) för att avsluta eller, Tryck på valfri tangent för att fortsätta.";
                     Console.SetCursorPosition(windowWidth.SetWidth(gissaText), windowWidth.SetXpos(-1));
-                    Console.Write("                                                                                    ");
+                    Console.Write(space);
                     Console.SetCursorPosition(windowWidth.SetWidth(correct), windowWidth.SetXpos(-1));
                     Console.Write(correct);
                     Console.SetCursorPosition(windowWidth.SetWidth(press), windowWidth.SetXpos());
@@ -138,14 +139,14 @@
                     ++score;
                     userScore.Insert(tempUserIndex, score);
                     Console.SetCursorPosition(windowWidth.SetWidth(press), windowWidth.SetXpos());
-                    Console.Write("                                                                                 ");
+                    Console.Write(space);
                     if (yN == "n") nyttSpel = false;
                     else 
                     {
                         Console.SetCursorPosition(windowWidth.SetWidth(correct), windowWidth.SetXpos(-1));
-                        Console.Write("                                                                                    ");
+                        Console.Write(space);
                         Console.SetCursorPosition(windowWidth.SetWidth(correct), windowWidth.SetXpos());
-                        Console.Write("                                                                                    ");
+                        Console.Write(space);
                     }
                 }
 
@@ -153,7 +154,7 @@
                 {   
                     string guessLow = "Du gissade lägre än talet.";
                     Console.SetCursorPosition((windowWidth.MaxWidth()), Xpos-1);
-                    Console.Write("                                                                                    ");
+                    Console.Write(space);
                     Console.SetCursorPosition(windowWidth.SetWidth(guessLow), windowWidth.SetXpos(-1));
                     Console.Write(guessLow);
                 }
@@ -162,7 +163,7 @@
                 {
                     string guessHigh = "Du gissade högre än talet.";
                     Console.SetCursorPosition(windowWidth.MaxWidth(), windowWidth.SetXpos(-1));
-                    Console.Write("                                                                                    ");
+                    Console.Write(space);
                     Console.SetCursorPosition(windowWidth.SetWidth(guessHigh), windowWidth.SetXpos(-1));
                     Console.WriteLine(guessHigh);
                 }
