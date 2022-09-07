@@ -78,8 +78,8 @@
             Console.SetCursorPosition(windowWidth.SetWidth(input), Xpos);
             Console.Write("                                                 ");
 
-            userList.Add("Tony");
-            userScore.Add(3);
+            //userList.Add("Tony");
+            //userScore.Add(3);
             int slumpTal = slump.Next(1, 11);
             while (nyttSpel == true)
             {
@@ -93,8 +93,6 @@
                 else 
                 {
                     userList.Add(name);
-                    //Lägger till namnet som angavs till en txt fil
-                    ToFile(name);
                     userScore.Add(0);
                     tempUserIndex = userList.Count()-1;
                     score = userScore[tempUserIndex];
@@ -216,6 +214,7 @@
                 ++Xpos;
                 Console.SetCursorPosition(windowWidth.SetWidth(user), ++Xpos);
                 Console.Write(user);
+                ToFile(user);
             }
             string pressAny = "Tryck på valfri knapp för att återgå till huvudmenyn.";
             Console.SetCursorPosition(windowWidth.SetWidth(pressAny), windowWidth.SetXpos(5));
@@ -230,11 +229,14 @@
             {
                 string createText = "Välkommen till Gissa Talets användarlista!" + Environment.NewLine;
                 File.WriteAllText(path, createText);
-
             }
 
-            string appendText = name + Environment.NewLine;
-            File.AppendAllText(path, appendText);
+            string replaceText = File.ReadAllText(path);
+            if (!replaceText.Contains(name))
+            {
+                string appendText = name + Environment.NewLine;
+                File.AppendAllText(path, appendText);
+            }
         }
 
         public static void Titel()
