@@ -48,9 +48,9 @@ namespace gissatalet
             string optionOne = string.Format("1) Spela Gissa Talet!");
             string optionTwo = string.Format("2) Se Highscore!");
             string optionThree = string.Format("3) Avsluta :(");
-            SetXandWrite(optionOne,1);
-            SetXandWrite(optionTwo,2);
-            SetXandWrite(optionThree,3);
+            SetXandWrite(optionOne, 1);
+            SetXandWrite(optionTwo, 2);
+            SetXandWrite(optionThree, 3);
         }
         public static void NewGame()
         {
@@ -83,7 +83,7 @@ namespace gissatalet
                     tempUserIndex = userList.FindIndex(a => a.Contains(name));
                     score = userScore[tempUserIndex];
                 }
-                else 
+                else
                 {
                     userList.Add(name);
                     userScore.Add(0);
@@ -99,14 +99,14 @@ namespace gissatalet
                 SetXandWrite(prompt, 1);
                 int gissning = 0;
                 string aGissning = Console.ReadLine();
-                try 
+                try
                 {
                     gissning = Int32.Parse(aGissning);
                 }
-                catch (FormatException) 
+                catch (FormatException)
                 {
                     string error = "Du måste skriva in ett nummer!";
-                    SetXandWrite(error,3);
+                    SetXandWrite(error, 3);
                 }
                 if (gissning == slumpTal)
                 {
@@ -123,7 +123,7 @@ namespace gissatalet
                     string yN = Console.ReadLine().ToLower();
                     SetXandWrite(space);
                     if (yN == "n") nyttSpel = false;
-                    else 
+                    else
                     {
                         SetXandWrite(space, -1);
                         SetXandWrite(space);
@@ -131,7 +131,7 @@ namespace gissatalet
                 }
 
                 else if (gissning < slumpTal)
-                {   
+                {
                     string guessLow = "Du gissade lägre än talet.";
                     SetXandWrite(space, -1);
                     SetXandWrite(guessLow, -1);
@@ -160,7 +160,7 @@ namespace gissatalet
             }
             Console.ForegroundColor = ConsoleColor.White;
             List<string> highScore = new();
-            if (userList.Count == 0) 
+            if (userList.Count == 0)
             {
                 userList.Add("Local Extremum");
                 userScore.Add(3);
@@ -209,29 +209,29 @@ namespace gissatalet
         }
         public class WindowWidth
         {
-            public int MaxWidth() 
+            public int MaxWidth()
             {
                 return Console.WindowWidth/2;
             }
-            public int SetWidth(string word) 
+            public int SetWidth(string word)
             {
-                return MaxWidth() -( word.Length/2 );
+                return MaxWidth() -(word.Length/2);
             }
-            public int SetXpos() 
+            public int SetXpos()
             {
                 return Xpos;
             }
-            public int SetXpos(int yneg) 
+            public int SetXpos(int yneg)
             {
                 return Xpos + (yneg);
             }
         }
-        public static void SetXandWrite(string setWord)    
+        public static void SetXandWrite(string setWord)
         {
             Console.SetCursorPosition(windowWidth.SetWidth(setWord), windowWidth.SetXpos());
             Console.Write(setWord);
         }
-        public static void SetXandWrite(string setWord, int setNewXpos)    
+        public static void SetXandWrite(string setWord, int setNewXpos)
         {
             Console.SetCursorPosition(windowWidth.SetWidth(setWord), windowWidth.SetXpos(setNewXpos));
             Console.Write(setWord);
