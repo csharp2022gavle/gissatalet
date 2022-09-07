@@ -181,10 +181,12 @@ namespace gissatalet
             string description = "POÄNG | NAMN";
             SetXandWrite(description);
             int next = 1;
-            foreach (var user in highScore) 
+            for (int i = 0; i < 3; i++)
             {
+                string user = highScore[i];
                 ++next;
                 SetXandWrite(user, ++next);
+
             }
             string pressAny = "Tryck på valfri knapp för att återgå till huvudmenyn.";
             SetXandWrite(pressAny, 13);
