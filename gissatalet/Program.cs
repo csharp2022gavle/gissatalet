@@ -51,29 +51,60 @@ namespace gissatalet
         }
         public static void NewGame()
         {
+
+            bool nyttSpel = true;
+            Random slump = new Random();
+            int slumpTal = slump.Next(1, 11);
+
             Console.WriteLine("Nu startas ett spel skriv ditt namn:");
             string name = Console.ReadLine();
-            userList.Add(name);
-            userScore.Add(0);
+            
+
+            while (nyttSpel == true) 
+            { 
+
+                Console.WriteLine("Gissa ett nummer mellan 1 - 10");
+                int gissning = int.Parse(Console.ReadLine());
+
+                if (gissning == slumpTal)
+                {
+                    Console.WriteLine("Du gissade rätt!");
+                    nyttSpel = false;
+                }
+
+                else if (gissning < slumpTal)
+                {
+                    Console.WriteLine("Du gissade lägre än talet.");
+                }
+
+                else
+                {
+                    Console.WriteLine("Du gissade högre än talet.");
+                }
+
+
+                
+            }
+
             foreach (var user in userList)
             {
                 if (userList.Contains(user))
                 {
-                    int tempUserIndex = userList.IndexOf(user);
-                    string userBack = string.Format("Du {0} har {1} poäng!", user, tempUserScore);
-                    Console.WriteLine(userBack);
+                    int tempUserIndex = userList.IndexOf(user);                    
                     int score = 1;
                     userScore[tempUserIndex] += score;
+                        
+                    string userBack = string.Format("Du {0} har {1} poäng!", user, tempUserIndex);
                 }
             }
 
-            for (int i = 0; i < userScore.Count; i++)
-            {
-            }
+            Console.WriteLine();
+
+
         }
         public static void Highscore()
         {
-            
+
         }
 
         public static void Titel()
