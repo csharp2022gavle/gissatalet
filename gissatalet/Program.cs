@@ -87,8 +87,8 @@ namespace gissatalet
                 {
                     userList.Add(name);
                     userScore.Add(0);
+                    score = 0;
                     tempUserIndex = userList.Count()-1;
-                    score = userScore[tempUserIndex];
                 }
                 string userBack = string.Format("Du {0} har {1} poäng!", userList[tempUserIndex], score);
                 SetXandWrite(userBack, 5);
@@ -113,13 +113,14 @@ namespace gissatalet
                     slumpTal = slump.Next(1, 11);
                     string correct = "Du gissade rätt!";
                     string press = "Tryck på (N) för att avsluta eller, Tryck på valfri tangent för att fortsätta.";
+                    score++;
+                    userScore.RemoveAt(tempUserIndex);
+                    userScore.Insert(tempUserIndex, score);
                     SetXandWrite(space, -1);
                     SetXandWrite(correct, -1);
                     SetXandWrite(press);
                     SetXandWrite(prompt, 1);
                     string yN = Console.ReadLine().ToLower();
-                    ++score;
-                    userScore.Insert(tempUserIndex, score);
                     SetXandWrite(space);
                     if (yN == "n") nyttSpel = false;
                     else 
