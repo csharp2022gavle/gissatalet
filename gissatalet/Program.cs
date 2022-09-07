@@ -10,7 +10,6 @@ namespace gissatalet
         public static int Xpos = 13;
         public static string fontPath = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "font.flf)");
         private static Stream fontStream;
-
         public static void Init() { Xpos = 13; Console.Clear(); }
         public static WindowWidth windowWidth = new();
         public static string space = "                                                                                    ";
@@ -181,7 +180,7 @@ namespace gissatalet
             string description = "POÄNG | NAMN";
             SetXandWrite(description);
             int next = 1;
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < highScore.Count; i++)
             {
                 string user = highScore[i];
                 ++next;
