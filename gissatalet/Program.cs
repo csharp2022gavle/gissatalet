@@ -94,7 +94,7 @@
                 {
                     userList.Add(name);
                     userScore.Add(0);
-                    tempUserIndex = userList.Count();
+                    tempUserIndex = userList.Count()-1;
                     score = userScore[tempUserIndex];
                 }
                 string userBack = string.Format("Du {0} har {1} poäng!", userList[tempUserIndex], score);
