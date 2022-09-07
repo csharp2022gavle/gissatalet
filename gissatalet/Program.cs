@@ -8,7 +8,7 @@
         public static int Xpos = 13;
         public static void Init() { Xpos = 13; Console.Clear(); }
         public static WindowWidth windowWidth = new WindowWidth();
-        public string space = "                                                                                    ";
+        public static string space = "                                                                                    ";
         static void Main(string[] args)
         {
             bool startaSpel = true;
@@ -16,10 +16,8 @@
             {
                 Titel();
                 Meny();
-                int xPos = 20;
-                int windiwSize = 60;
                 string makeAMove = "Gör ett val: ";
-                Console.SetCursorPosition(windiwSize - makeAMove.Length/2, xPos);
+                Console.SetCursorPosition(windowWidth.SetWidth(makeAMove, Xpos);
                 Console.Write(makeAMove);
                 string userValue = Console.ReadLine();
                 if (userValue == "1")
@@ -38,7 +36,6 @@
                     Console.Clear();
                 }
             }
-
         }
         public static void Meny()
         {
@@ -78,9 +75,6 @@
             string name = Console.ReadLine();
             Console.SetCursorPosition(windowWidth.SetWidth(input), Xpos);
             Console.Write(space);
-
-            userList.Add("Tony");
-            userScore.Add(3);
             int slumpTal = slump.Next(1, 11);
             while (nyttSpel == true)
             {
@@ -167,10 +161,7 @@
                     Console.SetCursorPosition(windowWidth.SetWidth(guessHigh), windowWidth.SetXpos(-1));
                     Console.WriteLine(guessHigh);
                 }
-
             }
-
-
             Console.WriteLine();
         }
         public static void Highscore()
@@ -235,10 +226,8 @@
                  ░▒   ▒ ░▓  ▒ ▒▓▒ ▒ ░▒ ▒▓▒ ▒ ░ ▒▒   ▓▒█░     ▒ ░░    ▒▒   ▓▒█░░ ▒░▓  ░░░ ▒░ ░ ▒ ░░   
                   ░   ░  ▒ ░░ ░▒  ░ ░░ ░▒  ░ ░  ▒   ▒▒ ░       ░      ▒   ▒▒ ░░ ░ ▒  ░ ░ ░  ░   ░    
                 ░ ░   ░  ▒ ░░  ░  ░  ░  ░  ░    ░   ▒        ░        ░   ▒     ░ ░      ░    ░      
-                      ░  ░        ░        ░        ░  ░                  ░  ░    ░  ░   ░  ░        
-                                                                                     ";
+                      ░  ░        ░        ░        ░  ░                  ░  ░    ░  ░   ░  ░        ";
             Console.WriteLine(titel);
-
         }
         public class WindowWidth
         {
