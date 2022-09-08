@@ -8,6 +8,7 @@
         public static int Xpos = 13;
         public static void Init() { Xpos = 13; Console.Clear(); }
         public static WindowWidth windowWidth = new WindowWidth();
+        public static string path = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "Spelare.txt");
         static void Main(string[] args)
         {
             bool startaSpel = true;
@@ -28,6 +29,10 @@
                 }
                 if (userValue == "2")
                 {
+                    if (!File.Exists(path))
+                    {
+                        File.WriteAllText(path, "");
+                    }
                     Init();
                     Highscore();
                 }
@@ -188,17 +193,6 @@
             Console.ForegroundColor = ConsoleColor.DarkRed; Console.WriteLine(title);
             Console.ForegroundColor = ConsoleColor.White;
             List<string> highScore = new List<string>();
-            if (userList.Count == 0) 
-            {
-                userList.Add("Local Extremum");
-                userScore.Add(3);
-                userList.Add("The Double Equation");
-                userScore.Add(1);
-                userList.Add("Root Of Pi");
-                userScore.Add(4);
-                userList.Add("Golden ratio");
-                userScore.Add(2);
-            }
             foreach (var user in userList)
             {
                 int tempIndex = userList.IndexOf(user);
@@ -206,15 +200,24 @@
             }
             highScore.Sort();
             highScore.Reverse();
+            foreach (var item in highScore)
+            {
+                ToFile(item);
+            }
+
             string description = "POÄNG | NAMN";
             Console.SetCursorPosition(windowWidth.SetWidth(description), windowWidth.SetXpos());
             Console.Write(description);
-            foreach (var user in highScore) 
+
+            string[] HighScoreFile = File.ReadAllLines(path);
+            List<string> readHighScoreFile = new List<string>(HighScoreFile);
+            readHighScoreFile.Sort();
+            readHighScoreFile.Reverse();
+            foreach (var user in readHighScoreFile) 
             {
                 ++Xpos;
                 Console.SetCursorPosition(windowWidth.SetWidth(user), ++Xpos);
                 Console.Write(user);
-                ToFile(user);
             }
             string pressAny = "Tryck på valfri knapp för att återgå till huvudmenyn.";
             Console.SetCursorPosition(windowWidth.SetWidth(pressAny), windowWidth.SetXpos(5));
@@ -223,16 +226,9 @@
         }
         public static void ToFile(string name)
         {
-            string path = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "Spelare.txt");
-
-            if (!File.Exists(path))
-            {
-                string createText = "Välkommen till Gissa Talets användarlista!" + Environment.NewLine;
-                File.WriteAllText(path, createText);
-            }
-
-            string replaceText = File.ReadAllText(path);
-            if (!replaceText.Contains(name))
+            string[] textFilePath = File.ReadAllLines(path);
+            List<string> textFile = new List<string>(textFilePath);
+            if (!textFile.Contains(name))
             {
                 string appendText = name + Environment.NewLine;
                 File.AppendAllText(path, appendText);
