@@ -1,4 +1,6 @@
 ﻿using System.Net;
+using static System.Formats.Asn1.AsnWriter;
+using System.Xml.Linq;
 
 namespace gissatalet
 {
@@ -16,6 +18,20 @@ namespace gissatalet
         public static string space = "                                                                                    ";
         static void Main(string[] args)
         {
+            if (!File.Exists(path))
+            {
+                File.WriteAllText(path, "");
+            }
+            string[] HighScoreFile = File.ReadAllLines(path);
+            for (int i = 0; i < HighScoreFile.Length; ++i)
+            {
+                string UnsplitUser = HighScoreFile[i];
+                String[] userData = UnsplitUser.Split(" | ");
+                int userUnSetScore = Int32.Parse(userData[0]);
+                string user = userData[1];
+                userList.Add(user);
+                userScore.Add(userUnSetScore);
+            }
             WebClient client = new();
             File.WriteAllText(fontPath, client.DownloadString("https://raw.githubusercontent.com/xero/figlet-fonts/master/Bloody.flf"));
             bool startaSpel = true;
@@ -33,15 +49,18 @@ namespace gissatalet
                 }
                 if (userValue == "2")
                 {
-                    if (!File.Exists(path))
-                    {
-                        File.WriteAllText(path, "");
-                    }
                     Init();
                     Highscore();
                 }
                 if (userValue == "3")
                 {
+                    File.WriteAllText(path, "");
+                    foreach (var item in userList)
+                    {
+                        int tempUserUpload = userList.FindIndex(a => a.Contains(item));
+                        string tempUserUploadScore = userScore[tempUserUpload].ToString();
+                        ToFile(tempUserUploadScore, item);
+                    }
                     startaSpel = false;
                     Console.Clear();
                 }
@@ -60,7 +79,7 @@ namespace gissatalet
         public static void NewGame()
         {
             fontStream = new FileStream(fontPath, FileMode.Open, FileAccess.Read);
-            var font = new WenceyWang.FIGlet.FIGletFont(fontStream);
+            WenceyWang.FIGlet.FIGletFont font = new WenceyWang.FIGlet.FIGletFont(fontStream);
             var text = new WenceyWang.FIGlet.AsciiArt("        NEW GAME!", font: font);
             text.ToString(); var result = text.Result;
             Console.WriteLine(space);
@@ -172,22 +191,12 @@ namespace gissatalet
             }
             highScore.Sort();
             highScore.Reverse();
-
-            foreach (var item in highScore)
-            {
-                ToFile(item);
-            }
-
             string description = "POÄNG | NAMN";
             SetXandWrite(description);
             int next = 1;
-            string[] HighScoreFile = File.ReadAllLines(path);
-            List<string> readHighScoreFile = new List<string>(HighScoreFile);
-            readHighScoreFile.Sort();
-            readHighScoreFile.Reverse();
-            for (int i = 0; i < readHighScoreFile.Count; i++)
+            for (int i = 0; i < highScore.Count; i++)
             {
-                string user = readHighScoreFile[i];
+                string user = highScore[i];
                 ++next;
                 SetXandWrite(user, ++next);
 
@@ -240,13 +249,13 @@ namespace gissatalet
             Console.SetCursorPosition(windowWidth.SetWidth(setWord), windowWidth.SetXpos(setNewXpos));
             Console.Write(setWord);
         }
-        public static void ToFile(string name)
+        public static void ToFile(string userScore, string name)
         {
             string[] textFilePath = File.ReadAllLines(path);
             List<string> textFile = new List<string>(textFilePath);
             if (!textFile.Contains(name))
             {
-                string appendText = name + Environment.NewLine;
+                string appendText = userScore + " | " + name + Environment.NewLine;
                 File.AppendAllText(path, appendText);
             }
         }
