@@ -194,12 +194,20 @@ namespace gissatalet
             string description = "POÄNG | NAMN";
             SetXandWrite(description);
             int next = 1;
+            if (highScore.Count >= 3) 
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    string user = highScore[i];
+                    ++next;
+                    SetXandWrite(user, ++next);
+                }
+            }
             for (int i = 0; i < highScore.Count; i++)
             {
                 string user = highScore[i];
                 ++next;
                 SetXandWrite(user, ++next);
-
             }
             string pressAny = "Tryck på valfri knapp för att återgå till huvudmenyn.";
             SetXandWrite(pressAny, 13);
