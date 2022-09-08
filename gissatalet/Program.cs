@@ -8,6 +8,7 @@ namespace gissatalet
         public static List<int> userScore = new();
         public static int tempUserScore;
         public static int Xpos = 13;
+        public static string path = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "Spelare.txt");
         public static string fontPath = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "font.flf)");
         private static Stream fontStream;
         public static void Init() { Xpos = 13; Console.Clear(); }
@@ -32,6 +33,10 @@ namespace gissatalet
                 }
                 if (userValue == "2")
                 {
+                    if (!File.Exists(path))
+                    {
+                        File.WriteAllText(path, "");
+                    }
                     Init();
                     Highscore();
                 }
@@ -160,17 +165,6 @@ namespace gissatalet
             }
             Console.ForegroundColor = ConsoleColor.White;
             List<string> highScore = new();
-            if (userList.Count == 0)
-            {
-                userList.Add("Local Extremum");
-                userScore.Add(3);
-                userList.Add("The Double Equation");
-                userScore.Add(1);
-                userList.Add("Root Of Pi");
-                userScore.Add(4);
-                userList.Add("Golden ratio");
-                userScore.Add(2);
-            }
             foreach (var user in userList)
             {
                 int tempIndex = userList.IndexOf(user);
@@ -178,12 +172,22 @@ namespace gissatalet
             }
             highScore.Sort();
             highScore.Reverse();
+
+            foreach (var item in highScore)
+            {
+                ToFile(item);
+            }
+
             string description = "POÄNG | NAMN";
             SetXandWrite(description);
             int next = 1;
-            for (int i = 0; i < highScore.Count; i++)
+            string[] HighScoreFile = File.ReadAllLines(path);
+            List<string> readHighScoreFile = new List<string>(HighScoreFile);
+            readHighScoreFile.Sort();
+            readHighScoreFile.Reverse();
+            for (int i = 0; i < readHighScoreFile.Count; i++)
             {
-                string user = highScore[i];
+                string user = readHighScoreFile[i];
                 ++next;
                 SetXandWrite(user, ++next);
 
@@ -235,6 +239,16 @@ namespace gissatalet
         {
             Console.SetCursorPosition(windowWidth.SetWidth(setWord), windowWidth.SetXpos(setNewXpos));
             Console.Write(setWord);
+        }
+        public static void ToFile(string name)
+        {
+            string[] textFilePath = File.ReadAllLines(path);
+            List<string> textFile = new List<string>(textFilePath);
+            if (!textFile.Contains(name))
+            {
+                string appendText = name + Environment.NewLine;
+                File.AppendAllText(path, appendText);
+            }
         }
     }
 }
