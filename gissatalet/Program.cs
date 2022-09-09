@@ -1,13 +1,10 @@
-﻿using System.Linq;
-using System.Net;
-
+﻿using System.Net;
 namespace gissatalet
 {
+
     internal class Program
     {
-        public static List<string> userList = new();
-        public static List<int> userScore = new();
-        public static int tempUserScore;
+        public static List<Tuple<int, string>> users = new();
         public static int Xpos;
         public static string path = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "Spelare.txt");
         public static string fontPath = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "font.flf)");
@@ -17,19 +14,13 @@ namespace gissatalet
         public static string space = "                                                                                    ";
         static void Main(string[] args)
         {
-            if (!File.Exists(path))
-            {
-                File.WriteAllText(path, "");
-            }
+            if (!File.Exists(path)) File.WriteAllText(path, "");
             string[] HighScoreFile = File.ReadAllLines(path);
             for (int i = 0; i < HighScoreFile.Length; ++i)
             {
                 string UnsplitUser = HighScoreFile[i];
                 String[] userData = UnsplitUser.Split(" | ");
-                int userUnSetScore = Int32.Parse(userData[0]);
-                string user = userData[1];
-                userList.Add(user);
-                userScore.Add(userUnSetScore);
+                users.Add(new Tuple<int, string>(Int32.Parse(userData[0]), userData[1]));
             }
             WebClient client = new();
             File.WriteAllText(fontPath, client.DownloadString("https://raw.githubusercontent.com/xero/figlet-fonts/master/Bloody.flf"));
@@ -41,24 +32,13 @@ namespace gissatalet
                 string makeAMove = "Gör ett val: ";
                 SetXandWrite(makeAMove, 5);
                 string userValue = Console.ReadLine();
-                if (userValue == "1")
-                {
-                    NewGame();
-                }
-                if (userValue == "2")
-                {
-                    Highscore();
-                }
+                if (userValue == "1") NewGame();
+                if (userValue == "2") Highscore();
                 if (userValue == "3")
                 {
                     Init();
                     File.WriteAllText(path, "");
-                    foreach (var item in userList)
-                    {
-                        int tempUserUpload = userList.FindIndex(a => a.Contains(item));
-                        string tempUserUploadScore = userScore[tempUserUpload].ToString();
-                        ToFile(tempUserUploadScore, item);
-                    }
+                    foreach (var item in users) ToFile(item.Item1.ToString(), item.Item2.ToString());
                     startaSpel = false;
                 }
             }
@@ -85,22 +65,16 @@ namespace gissatalet
             int slumpTal = slump.Next(1, 11);
             while (nyttSpel == true)
             {
-                int tempUserIndex;
-                int score;
+                int tempUserIndex = users.FindIndex(u => u.Item2 == name);
+                bool nameExists = false;
                 string prompt = "> ";
-                if (userList.Contains(name))
+                var tempUser = new List<Tuple<int, string>>();
+                if (tempUserIndex == -1)
                 {
-                    tempUserIndex = userList.FindIndex(a => a.Contains(name));
-                    score = userScore[tempUserIndex];
+                    users.Add(new Tuple<int, string>(0, name));
+                    tempUserIndex = users.Count()-1;
                 }
-                else
-                {
-                    userList.Add(name);
-                    userScore.Add(0);
-                    score = 0;
-                    tempUserIndex = userList.Count()-1;
-                }
-                string userBack = string.Format("Du {0} har {1} poäng!", userList[tempUserIndex], score);
+                string userBack = string.Format("Du {0} har {1} poäng!", users[tempUserIndex].Item2, users[tempUserIndex].Item1);
                 SetXandWrite(userBack, 5);
                 SetXandWrite(space);
                 string gissaText = "Gissa ett nummer mellan 1 - 10";
@@ -124,9 +98,11 @@ namespace gissatalet
                     slumpTal = slump.Next(1, 11);
                     string correct = "Du gissade rätt!";
                     string press = "Tryck på (N) för att avsluta eller, Tryck på valfri tangent för att fortsätta.";
-                    score++;
-                    userScore.RemoveAt(tempUserIndex);
-                    userScore.Insert(tempUserIndex, score);
+                    tempUser.Add(new Tuple<int, string>(users[tempUserIndex].Item1+1, users[tempUserIndex].Item2));
+                    users.RemoveAt(tempUserIndex);
+                    if (tempUserIndex == users.Count) users.Insert(tempUserIndex-1, tempUser[0]);
+                    else users.Insert(tempUserIndex, tempUser[0]);
+                    tempUser.RemoveAt(0);
                     SetXandWrite(space, -1);
                     SetXandWrite(correct, -1);
                     SetXandWrite(press);
@@ -159,15 +135,8 @@ namespace gissatalet
         {
             Titel("       HighScore!");
             var highScore = new List<Tuple<int, string>>();
-            foreach (var user in userList)
-            {
-                int tempIndex = userList.IndexOf(user);
-                highScore.Add(new Tuple<int, string>(userScore[tempIndex], user));
-            }
-            highScore.Sort((e1, e2) =>
-            {
-                return e2.Item1.CompareTo(e1.Item1);
-            });
+            foreach (var user in users) highScore.Add(new Tuple<int, string>(user.Item1, user.Item2));
+            highScore.Sort((e1, e2) => {return e2.Item1.CompareTo(e1.Item1);});
             string top3 = "De top 3 Bästa spelana";
             SetXandWrite(top3);
             string description = "POÄNG | NAMN";
@@ -204,30 +173,15 @@ namespace gissatalet
             text.ToString(); var result = text.Result;
             Console.WriteLine(space);
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            for (int i = 0; i < result.Length; i++)
-            {
-                Console.WriteLine(result[i]);
-            }
+            for (int i = 0; i < result.Length; i++) Console.WriteLine(result[i]);
             Console.ForegroundColor = ConsoleColor.White;
         }
         public class WindowWidth
         {
-            public int MaxWidth()
-            {
-                return Console.WindowWidth/2;
-            }
-            public int SetWidth(string word)
-            {
-                return MaxWidth() -(word.Length/2);
-            }
-            public int SetXpos()
-            {
-                return Xpos;
-            }
-            public int SetXpos(int yneg)
-            {
-                return Xpos + (yneg);
-            }
+            public int MaxWidth(){ return Console.WindowWidth/2; }
+            public int SetWidth(string word) { return MaxWidth() -(word.Length/2); }
+            public int SetXpos() { return Xpos; }
+            public int SetXpos(int yneg) { return Xpos + (yneg); }
         }
         public static void SetXandWrite(string setWord)
         {
