@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Linq;
+using System.Net;
 
 namespace gissatalet
 {
@@ -157,33 +158,35 @@ namespace gissatalet
         public static void Highscore()
         {
             Titel("       HighScore!");
-            List<string> highScore = new();
+            var highScoreTemp = new List<Tuple<int, string>>();
             foreach (var user in userList)
             {
                 int tempIndex = userList.IndexOf(user);
-                highScore.Add(userScore[tempIndex].ToString() + " | " + user);
+                highScoreTemp.Add(new Tuple<int, string>(userScore[tempIndex], user));
             }
-            highScore.Sort();
-            highScore.Reverse();
+            highScoreTemp.Sort((e1, e2) =>
+            {
+                return e2.Item1.CompareTo(e1.Item1);
+            });
             string top3 = "De top 3 Bästa spelana";
             SetXandWrite(top3);
             string description = "POÄNG | NAMN";
             SetXandWrite(description, 2);
             int next = 3;
-            if (highScore.Count >= 3)
+            if (highScoreTemp.Count >= 3)
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    string user = highScore[i];
+                    string user = string.Format("{0} | {1}", highScoreTemp[i].Item1.ToString(), highScoreTemp[i].Item2);
                     ++next;
                     SetXandWrite(user, ++next);
                 }
             }
             else
             {
-                for (int i = 0; i < highScore.Count; i++)
+                for (int i = 0; i < highScoreTemp.Count; i++)
                 {
-                    string user = highScore[i];
+                    string user = highScoreTemp[i].ToString();
                     ++next;
                     SetXandWrite(user, ++next);
                 }
