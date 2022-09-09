@@ -239,7 +239,7 @@ namespace gissatalet
         public static void ToFile(string userScore, string name)
         {
             string[] textFilePath = File.ReadAllLines(path);
-            List<string> textFile = new List<string>(textFilePath);
+            List<string> textFile = new(textFilePath);
             if (!textFile.Contains(name))
             {
                 string appendText = userScore + " | " + name + Environment.NewLine;
