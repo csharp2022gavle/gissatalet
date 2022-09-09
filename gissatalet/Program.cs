@@ -1,6 +1,4 @@
 ﻿using System.Net;
-using static System.Formats.Asn1.AsnWriter;
-using System.Xml.Linq;
 
 namespace gissatalet
 {
@@ -9,7 +7,7 @@ namespace gissatalet
         public static List<string> userList = new();
         public static List<int> userScore = new();
         public static int tempUserScore;
-        public static int Xpos = 13;
+        public static int Xpos;
         public static string path = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "Spelare.txt");
         public static string fontPath = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "font.flf)");
         private static Stream fontStream;
@@ -37,23 +35,22 @@ namespace gissatalet
             bool startaSpel = true;
             while (startaSpel == true)
             {
-                Titel();
+                Titel("      Gissa Talet");
                 Meny();
                 string makeAMove = "Gör ett val: ";
                 SetXandWrite(makeAMove, 5);
                 string userValue = Console.ReadLine();
                 if (userValue == "1")
                 {
-                    Init();
                     NewGame();
                 }
                 if (userValue == "2")
                 {
-                    Init();
                     Highscore();
                 }
                 if (userValue == "3")
                 {
+                    Init();
                     File.WriteAllText(path, "");
                     foreach (var item in userList)
                     {
@@ -62,13 +59,11 @@ namespace gissatalet
                         ToFile(tempUserUploadScore, item);
                     }
                     startaSpel = false;
-                    Console.Clear();
                 }
             }
         }
         public static void Meny()
         {
-            Console.ForegroundColor = ConsoleColor.White;
             string optionOne = string.Format("1) Spela Gissa Talet!");
             string optionTwo = string.Format("2) Se Highscore!");
             string optionThree = string.Format("3) Avsluta :(");
@@ -78,17 +73,7 @@ namespace gissatalet
         }
         public static void NewGame()
         {
-            fontStream = new FileStream(fontPath, FileMode.Open, FileAccess.Read);
-            WenceyWang.FIGlet.FIGletFont font = new WenceyWang.FIGlet.FIGletFont(fontStream);
-            var text = new WenceyWang.FIGlet.AsciiArt("        NEW GAME!", font: font);
-            text.ToString(); var result = text.Result;
-            Console.WriteLine(space);
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            for (int i = 0; i < result.Length; i++)
-            {
-                Console.WriteLine(result[i]);
-            }
-            Console.ForegroundColor = ConsoleColor.White;
+            Titel("        NEW GAME!");
             bool nyttSpel = true;
             Random slump = new();
             string input = "Nu startas ett spel skriv ditt namn";
@@ -125,6 +110,7 @@ namespace gissatalet
                 string aGissning = Console.ReadLine();
                 try
                 {
+                    SetXandWrite(space, 3);
                     gissning = Int32.Parse(aGissning);
                 }
                 catch (FormatException)
@@ -153,14 +139,12 @@ namespace gissatalet
                         SetXandWrite(space);
                     }
                 }
-
                 else if (gissning < slumpTal)
                 {
                     string guessLow = "Du gissade lägre än talet.";
                     SetXandWrite(space, -1);
                     SetXandWrite(guessLow, -1);
                 }
-
                 else
                 {
                     string guessHigh = "Du gissade högre än talet.";
@@ -172,17 +156,7 @@ namespace gissatalet
         }
         public static void Highscore()
         {
-            fontStream = new FileStream(fontPath, FileMode.Open, FileAccess.Read);
-            var font = new WenceyWang.FIGlet.FIGletFont(fontStream);
-            var text = new WenceyWang.FIGlet.AsciiArt("       HighScore!", font: font);
-            text.ToString(); var result = text.Result;
-            Console.WriteLine(space);
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            for (int i = 0; i < result.Length; i++)
-            {
-                Console.WriteLine(@result[i]);
-            }
-            Console.ForegroundColor = ConsoleColor.White;
+            Titel("       HighScore!");
             List<string> highScore = new();
             foreach (var user in userList)
             {
@@ -191,10 +165,12 @@ namespace gissatalet
             }
             highScore.Sort();
             highScore.Reverse();
+            string top3 = "De top 3 Bästa spelana";
+            SetXandWrite(top3);
             string description = "POÄNG | NAMN";
-            SetXandWrite(description);
-            int next = 1;
-            if (highScore.Count >= 3) 
+            SetXandWrite(description, 2);
+            int next = 3;
+            if (highScore.Count >= 3)
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -203,22 +179,25 @@ namespace gissatalet
                     SetXandWrite(user, ++next);
                 }
             }
-            for (int i = 0; i < highScore.Count; i++)
+            else
             {
-                string user = highScore[i];
-                ++next;
-                SetXandWrite(user, ++next);
+                for (int i = 0; i < highScore.Count; i++)
+                {
+                    string user = highScore[i];
+                    ++next;
+                    SetXandWrite(user, ++next);
+                }
             }
             string pressAny = "Tryck på valfri knapp för att återgå till huvudmenyn.";
             SetXandWrite(pressAny, 13);
             Console.ReadLine();
         }
-        public static void Titel()
+        public static void Titel(string titelText)
         {
-            Console.Clear();
+            Init();
             fontStream = new FileStream(fontPath, FileMode.Open, FileAccess.Read);
             var font = new WenceyWang.FIGlet.FIGletFont(fontStream);
-            var text = new WenceyWang.FIGlet.AsciiArt("      Gissa Talet", font: font);
+            var text = new WenceyWang.FIGlet.AsciiArt(titelText, font: font);
             text.ToString(); var result = text.Result;
             Console.WriteLine(space);
             Console.ForegroundColor = ConsoleColor.DarkRed;
