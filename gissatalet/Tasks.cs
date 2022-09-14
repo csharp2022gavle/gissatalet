@@ -12,11 +12,11 @@ namespace gissatalet
     {
         public static List<Tuple<int, string>> users = new();
         public static string path = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "Spelare.txt");
-        public static string fontPath = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "font.flf)");
+        public static string fontPath = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "font.flf");
         public static int Xpos;
         public static async Task CreateHighscore(List<Tuple<int, string>> users)
         {
-            if (!File.Exists(path)) await File.WriteAllTextAsync(path, "");
+            if (!File.Exists(path))  File.WriteAllText(path, "");
             string[] HighScoreFile = File.ReadAllLines(path);
             for (int i = 0; i < HighScoreFile.Length; ++i)
             {
@@ -50,13 +50,13 @@ namespace gissatalet
             if (!textFile.Contains(name))
             {
                 string appendText = userScore + " | " + name + Environment.NewLine;
-                await File.AppendAllTextAsync(path, appendText);
+                File.AppendAllTextAsync(path, appendText);
             }
         }
         public static async Task StoreHighscore() 
         {
-            await File.WriteAllTextAsync(Tasks.path, "");
-            foreach (var item in Tasks.users) Tasks.ToFile(item.Item1.ToString(), item.Item2.ToString());
+            File.WriteAllTextAsync(Tasks.path, "");
+            foreach (var item in users) Tasks.ToFile(item.Item1.ToString(), item.Item2.ToString());
         }
     }
 }

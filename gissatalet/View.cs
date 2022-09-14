@@ -74,7 +74,8 @@ namespace gissatalet
                     string press = "Tryck på (N) för att avsluta eller, Tryck på valfri tangent för att fortsätta.";
                     tempUser.Add(new Tuple<int, string>(Tasks.users[tempUserIndex].Item1+1, Tasks.users[tempUserIndex].Item2));
                     Tasks.users.RemoveAt(tempUserIndex);
-                    if (tempUserIndex == Tasks.users.Count) Tasks.users.Insert(tempUserIndex-1, tempUser[0]);
+                    if (Tasks.users.Count == 0) Tasks.users.Insert(tempUserIndex, tempUser[0]);
+                    else if (tempUserIndex == Tasks.users.Count) Tasks.users.Insert(tempUserIndex-1, tempUser[0]);
                     else Tasks.users.Insert(tempUserIndex, tempUser[0]);
                     tempUser.RemoveAt(0);
                     tempUserIndex = Tasks.users.FindIndex(u => u.Item2 == name);
