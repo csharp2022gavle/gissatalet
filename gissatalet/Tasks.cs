@@ -52,11 +52,11 @@ namespace gissatalet
                 string appendText = userScore + " | " + name + Environment.NewLine;
                 File.AppendAllTextAsync(path, appendText);
             }
-        }
+        } 
         public static async Task StoreHighscore() 
         {
-            File.WriteAllTextAsync(Tasks.path, "");
-            foreach (var item in users) Tasks.ToFile(item.Item1.ToString(), item.Item2.ToString());
+            File.WriteAllTextAsync(path, "");
+            foreach (var item in users) ToFile(item.Item1.ToString(), item.Item2.ToString());
         }
     }
 }
