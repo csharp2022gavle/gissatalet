@@ -3,10 +3,10 @@ namespace gissatalet
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Tasks.CreateHighscore(Tasks.users);
-            Tasks.DownloadFont();
+            await Tasks.CreateHighscore(Tasks.users);
+            await Tasks.DownloadFont();
             bool startaSpel = true;
             while (startaSpel == true)
             {
@@ -17,8 +17,8 @@ namespace gissatalet
                 if (userValue == "3")
                 {
                     View.Init();
-                    File.WriteAllText(Tasks.path, "");
-                    foreach (var item in Tasks.users) Tasks.ToFile(item.Item1.ToString(), item.Item2.ToString());
+                    await File.WriteAllTextAsync(Tasks.path, "");
+                    foreach (var item in Tasks.users) await Tasks.ToFile(item.Item1.ToString(), item.Item2.ToString());
                     startaSpel = false;
                 }
             }

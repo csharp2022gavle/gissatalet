@@ -16,8 +16,8 @@ namespace gissatalet
         public static int Xpos;
         public static async Task CreateHighscore(List<Tuple<int, string>> users)
         {
-            if (!File.Exists(path))  File.WriteAllText(path, "");
-            string[] HighScoreFile = File.ReadAllLines(path);
+            if (!File.Exists(path))  await File.WriteAllTextAsync(path, "");
+            string[] HighScoreFile = await File.ReadAllLinesAsync(path);
             for (int i = 0; i < HighScoreFile.Length; ++i)
             {
                 string UnsplitUser = HighScoreFile[i];
@@ -50,13 +50,13 @@ namespace gissatalet
             if (!textFile.Contains(name))
             {
                 string appendText = userScore + " | " + name + Environment.NewLine;
-                File.AppendAllTextAsync(path, appendText);
+                await File.AppendAllTextAsync(path, appendText);
             }
         } 
         public static async Task StoreHighscore() 
         {
-            File.WriteAllTextAsync(path, "");
-            foreach (var item in users) ToFile(item.Item1.ToString(), item.Item2.ToString());
+            await File.WriteAllTextAsync(path, "");
+            foreach (var item in users) await ToFile(item.Item1.ToString(), item.Item2.ToString());
         }
     }
 }
