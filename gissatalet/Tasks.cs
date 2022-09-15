@@ -16,7 +16,7 @@ namespace gissatalet
         public static async Task Setup() 
         {
             string loadingHigschore = "Loading Highscore.....";
-            string loadingFont = " Loading ascii font....";
+            string loadingFont = " Downloading ascii font....";
             string complete = " Complete!";
             Console.ForegroundColor = ConsoleColor.DarkRed;
             SetCursor.SetXandWrite(loadingHigschore, 13);
