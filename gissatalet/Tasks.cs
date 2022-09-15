@@ -27,10 +27,11 @@ namespace gissatalet
         }
         public static async Task DownloadFont()
         {
-            WebClient client = new();
-            await File.WriteAllTextAsync(fontPath, client.DownloadString("https://raw.githubusercontent.com/xero/figlet-fonts/master/Bloody.flf"));
+            HttpClient client = new();
+            var response = await client.GetStringAsync("https://raw.githubusercontent.com/xero/figlet-fonts/master/Bloody.flf");
+            await File.WriteAllTextAsync(fontPath, response.ToString());
         }
-        public static async Task Titel(string titelText)
+        public static void Titel(string titelText)
         {
             View.Init();
             Stream fontStream;
