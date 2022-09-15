@@ -1,5 +1,4 @@
-﻿using System.Net;
-namespace gissatalet
+﻿namespace gissatalet
 {
     internal class Program
     {
