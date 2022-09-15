@@ -20,6 +20,7 @@ namespace gissatalet
             string complete = " Complete!";
             Console.ForegroundColor = ConsoleColor.DarkRed;
             SetCursor.SetXandWrite(loadingHigschore, 13);
+            Thread.Sleep(1000);
             await Tasks.CreateHighscore(Tasks.users);
             Thread.Sleep(1000);
             SetCursor.SetXandWrite(View.space, 13);
@@ -34,7 +35,17 @@ namespace gissatalet
         }
         public static async Task CreateHighscore(List<Tuple<int, string>> users)
         {
-            if (!File.Exists(path))  await File.WriteAllTextAsync(path, "");
+            if (!File.Exists(path)) 
+            {
+                string higschoreCreate = "Highscore doesn't existst, creating file....";
+                string complete = " Complete!";
+                SetCursor.SetXandWrite(higschoreCreate, 13);
+                await File.WriteAllTextAsync(path, "");
+                Thread.Sleep(1000);
+                SetCursor.SetXandWrite(View.space, 13);
+                SetCursor.SetXandWrite(complete, 13);
+                Thread.Sleep(200);
+            }
             string[] HighScoreFile = await File.ReadAllLinesAsync(path);
             for (int i = 0; i < HighScoreFile.Length; ++i)
             {
