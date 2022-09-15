@@ -13,6 +13,25 @@ namespace gissatalet
         public static string path = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "Spelare.txt");
         public static string fontPath = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "font.flf");
         public static int Xpos;
+        public static async Task Setup() 
+        {
+            string loadingHigschore = "Loading Highscore.....";
+            string loadingFont = " Loading ascii font....";
+            string complete = " Complete!";
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            SetCursor.SetXandWrite(loadingHigschore, 13);
+            await Tasks.CreateHighscore(Tasks.users);
+            Thread.Sleep(1000);
+            SetCursor.SetXandWrite(View.space, 13);
+            SetCursor.SetXandWrite(complete, 13);
+            Thread.Sleep(200);
+            SetCursor.SetXandWrite(loadingFont, 13);
+            await Tasks.DownloadFont();
+            Thread.Sleep(1000);
+            SetCursor.SetXandWrite(View.space, 13);
+            SetCursor.SetXandWrite(complete, 13);
+            Thread.Sleep(200);
+        }
         public static async Task CreateHighscore(List<Tuple<int, string>> users)
         {
             if (!File.Exists(path))  await File.WriteAllTextAsync(path, "");

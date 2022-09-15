@@ -4,8 +4,7 @@
     {
         static async Task Main(string[] args)
         {
-            await Tasks.CreateHighscore(Tasks.users);
-            await Tasks.DownloadFont();
+            await Tasks.Setup();
             bool startaSpel = true;
             while (startaSpel == true)
             {
