@@ -20,8 +20,8 @@ namespace gissatalet
         public static async Task Setup() 
         {
             string loadingHigschore = "Loading Highscore.....";
-            string loadingFont = " Downloading ascii font.....";
-            string complete = " Complete!";
+            string loadingFont = "Downloading ascii font.....";
+            string complete = "Complete!";
             Console.ForegroundColor = ConsoleColor.DarkRed;
             SetCursor.SetXandWrite(loadingHigschore);
             Task.Delay(500).GetAwaiter().GetResult();
@@ -74,7 +74,12 @@ namespace gissatalet
             text.ToString(); var result = text.Result;
             Console.WriteLine(View.space);
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            for (int i = 0; i < result.Length; i++) Console.WriteLine(result[i]);
+            for (int i = 0; i < result.Length; i++) 
+            {
+                int centerLeftSpace = (Console.WindowWidth / 2) - (result[2].Length / 2);
+                Console.SetCursorPosition(centerLeftSpace - 7, 2+i);
+                Console.Write(result[i]+ System.Environment.NewLine);
+            }
             Console.ForegroundColor = ConsoleColor.White;
         }
         public static async Task ToFile(string userScore, string name)
