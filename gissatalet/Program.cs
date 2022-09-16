@@ -12,7 +12,7 @@
                 for (int i = 0; i < View.spinner.Length ; i++)
                 {
                     Thread.Sleep(100);
-                    SetCursor.SetXandWrite(View.spinner[i], 5);
+                    SetCursor.SetXandWrite(View.spinner[i], 3);
                 }  
             }
             await setup;
