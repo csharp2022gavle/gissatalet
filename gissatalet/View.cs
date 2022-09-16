@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace gissatalet
 {
-    public class View
+    public sealed class View
     {
         public static string space = "                                                                                    ";
         public static void Init() { Tasks.Xpos = 13; Console.Clear(); }

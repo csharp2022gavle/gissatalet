@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace gissatalet
 {
-    internal class SetCursor
+    internal sealed class SetCursor
     {
         public static WindowWidth windowWidth = new();
         public static void SetXandWrite(string setWord)

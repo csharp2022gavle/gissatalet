@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace gissatalet
 {
-    public class WindowWidth
+    public sealed class WindowWidth
     {
         public int MaxWidth() { return Console.WindowWidth/2; }
         public int SetWidth(string word) { return MaxWidth() -(word.Length/2); }

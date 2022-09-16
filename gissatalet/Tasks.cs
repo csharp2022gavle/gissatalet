@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace gissatalet
 {
-    internal class Tasks
+    internal sealed class Tasks
     {
         public static List<Tuple<int, string>> users = new();
         public static string path = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "Spelare.txt");
@@ -20,15 +20,15 @@ namespace gissatalet
             string complete = " Complete!";
             Console.ForegroundColor = ConsoleColor.DarkRed;
             SetCursor.SetXandWrite(loadingHigschore, 13);
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             await Tasks.CreateHighscore(Tasks.users);
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             SetCursor.SetXandWrite(View.space, 13);
             SetCursor.SetXandWrite(complete, 13);
             Thread.Sleep(200);
             SetCursor.SetXandWrite(loadingFont, 13);
             await Tasks.DownloadFont();
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             SetCursor.SetXandWrite(View.space, 13);
             SetCursor.SetXandWrite(complete, 13);
             Thread.Sleep(200);
