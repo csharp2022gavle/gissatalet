@@ -4,14 +4,15 @@
     {
         static async Task Main(string[] args)
         {
+            Console.CursorVisible = false;
+            View.Init();
             var setup = Tasks.Setup();
             while (setup.IsCompleted == false) 
             {
                 for (int i = 0; i < View.spinner.Length ; i++)
                 {
                     Thread.Sleep(100);
-                    SetCursor.SetXandWrite(View.spinner[i], 16);
-                    SetCursor.SetXandWrite(View.space, 20);
+                    SetCursor.SetXandWrite(View.spinner[i], 5);
                 }  
             }
             await setup;

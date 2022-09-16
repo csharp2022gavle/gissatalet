@@ -17,6 +17,7 @@ namespace gissatalet
             View.Meny();
             string makeAMove = "Gör ett val: ";
             SetCursor.SetXandWrite(makeAMove, 5);
+            Console.CursorVisible = true;
         }
         public static void Meny()
         {
@@ -112,6 +113,7 @@ namespace gissatalet
         }
         public static void Highscore()
         {
+            Console.CursorVisible = false;
             Tasks.Titel("       HighScore!");
             var highScore = new List<Tuple<int, string>>();
             foreach (var user in Tasks.users) highScore.Add(new Tuple<int, string>(user.Item1, user.Item2));

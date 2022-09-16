@@ -19,23 +19,22 @@ namespace gissatalet
 
         public static async Task Setup() 
         {
-            
             string loadingHigschore = "Loading Highscore.....";
             string loadingFont = " Downloading ascii font.....";
             string complete = " Complete!";
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            SetCursor.SetXandWrite(loadingHigschore, 13);
+            SetCursor.SetXandWrite(loadingHigschore);
             Task.Delay(500).GetAwaiter().GetResult();
             await Tasks.CreateHighscore(Tasks.users);
             Task.Delay(500).GetAwaiter().GetResult();
-            SetCursor.SetXandWrite(View.space, 13);
-            SetCursor.SetXandWrite(complete, 13);
+            SetCursor.SetXandWrite(View.space);
+            SetCursor.SetXandWrite(complete);
             Task.Delay(200).GetAwaiter().GetResult();
-            SetCursor.SetXandWrite(loadingFont, 13);
+            SetCursor.SetXandWrite(loadingFont);
             await Tasks.DownloadFont();
             Task.Delay(200).GetAwaiter().GetResult();
-            SetCursor.SetXandWrite(View.space, 13);
-            SetCursor.SetXandWrite(complete, 13);
+            SetCursor.SetXandWrite(View.space);
+            SetCursor.SetXandWrite(complete);
             Task.Delay(200).GetAwaiter().GetResult();
         }
         public static async Task CreateHighscore(List<Tuple<int, string>> users)
