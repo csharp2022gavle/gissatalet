@@ -8,7 +8,24 @@ namespace gissatalet
 {
     public sealed class View
     {
-        public static readonly string[] spinner = { "|", "/", "-", @"\" };
+        public static readonly string[] spinner = 
+        {
+            "[    ]",
+            "[=   ]",
+            "[==  ]",
+            "[=== ]",
+            "[ ===]",
+            "[  ==]",
+            "[   =]",
+            "[    ]",
+            "[   =]",
+            "[  ==]",
+            "[ ===]",
+            "[====]",
+            "[=== ]",
+            "[==  ]",
+            "[=   ]"
+        };
         public static string space = "                                                                                    ";
         public static void Init() { Tasks.Xpos = 13; Console.Clear(); }
         public static void Front() 
@@ -113,7 +130,7 @@ namespace gissatalet
         }
         public static void Highscore()
         {
-            Console.CursorVisible = false;
+
             Tasks.Titel("       HighScore!");
             var highScore = new List<Tuple<int, string>>();
             foreach (var user in Tasks.users) highScore.Add(new Tuple<int, string>(user.Item1, user.Item2));

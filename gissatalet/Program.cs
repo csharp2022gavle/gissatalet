@@ -11,7 +11,7 @@
             {
                 for (int i = 0; i < View.spinner.Length ; i++)
                 {
-                    Thread.Sleep(100);
+                    Thread.Sleep(20);
                     SetCursor.SetXandWrite(View.spinner[i], 3);
                 }  
             }
