@@ -59,7 +59,6 @@ namespace gissatalet
             while (nyttSpel == true)
             {
                 int tempUserIndex = Tasks.users.FindIndex(u => u.Item2 == name);
-                bool nameExists = false;
                 string prompt = "> ";
                 var tempUser = new List<Tuple<int, string>>();
                 if (tempUserIndex == -1)
