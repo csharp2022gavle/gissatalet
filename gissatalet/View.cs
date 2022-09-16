@@ -8,6 +8,7 @@ namespace gissatalet
 {
     public sealed class View
     {
+        public static readonly string[] spinner = { "|", "/", "-", @"\" };
         public static string space = "                                                                                    ";
         public static void Init() { Tasks.Xpos = 13; Console.Clear(); }
         public static void Front() 

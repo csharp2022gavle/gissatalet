@@ -4,7 +4,17 @@
     {
         static async Task Main(string[] args)
         {
-            await Tasks.Setup();
+            var setup = Tasks.Setup();
+            while (setup.IsCompleted == false) 
+            {
+                for (int i = 0; i < View.spinner.Length ; i++)
+                {
+                    Thread.Sleep(100);
+                    SetCursor.SetXandWrite(View.spinner[i], 16);
+                    SetCursor.SetXandWrite(View.space, 20);
+                }  
+            }
+            await setup;
             bool startaSpel = true;
             while (startaSpel == true)
             {

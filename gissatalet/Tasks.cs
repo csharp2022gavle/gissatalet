@@ -1,7 +1,10 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,25 +16,27 @@ namespace gissatalet
         public static string path = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "Spelare.txt");
         public static string fontPath = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "font.flf");
         public static int Xpos;
+
         public static async Task Setup() 
         {
+            
             string loadingHigschore = "Loading Highscore.....";
-            string loadingFont = " Downloading ascii font....";
+            string loadingFont = " Downloading ascii font.....";
             string complete = " Complete!";
             Console.ForegroundColor = ConsoleColor.DarkRed;
             SetCursor.SetXandWrite(loadingHigschore, 13);
-            Thread.Sleep(500);
+            Task.Delay(500).GetAwaiter().GetResult();
             await Tasks.CreateHighscore(Tasks.users);
-            Thread.Sleep(500);
+            Task.Delay(500).GetAwaiter().GetResult();
             SetCursor.SetXandWrite(View.space, 13);
             SetCursor.SetXandWrite(complete, 13);
-            Thread.Sleep(200);
+            Task.Delay(200).GetAwaiter().GetResult();
             SetCursor.SetXandWrite(loadingFont, 13);
             await Tasks.DownloadFont();
-            Thread.Sleep(500);
+            Task.Delay(200).GetAwaiter().GetResult();
             SetCursor.SetXandWrite(View.space, 13);
             SetCursor.SetXandWrite(complete, 13);
-            Thread.Sleep(200);
+            Task.Delay(200).GetAwaiter().GetResult();
         }
         public static async Task CreateHighscore(List<Tuple<int, string>> users)
         {
