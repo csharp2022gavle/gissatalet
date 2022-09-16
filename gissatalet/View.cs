@@ -30,7 +30,7 @@ namespace gissatalet
         public static void Init() { Tasks.Xpos = 13; Console.Clear(); }
         public static void Front() 
         {
-            Tasks.Titel("      Gissa Talet");
+            Tasks.Titel("Gissa Talet");
             View.Meny();
             string makeAMove = "Gör ett val: ";
             SetCursor.SetXandWrite(makeAMove, 5);
@@ -47,7 +47,7 @@ namespace gissatalet
         }
         public static void NewGame()
         {
-            Tasks.Titel("        NEW GAME!");
+            Tasks.Titel("NEW GAME!");
             bool nyttSpel = true;
             Random slump = new();
             string input = "Nu startas ett spel skriv ditt namn";
@@ -131,7 +131,7 @@ namespace gissatalet
         public static void Highscore()
         {
             Console.CursorVisible = false;
-            Tasks.Titel("       HighScore!");
+            Tasks.Titel("HighScore!");
             var highScore = new List<Tuple<int, string>>();
             foreach (var user in Tasks.users) highScore.Add(new Tuple<int, string>(user.Item1, user.Item2));
             highScore.Sort((e1, e2) => { return e2.Item1.CompareTo(e1.Item1); });

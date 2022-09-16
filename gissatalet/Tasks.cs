@@ -77,7 +77,7 @@ namespace gissatalet
             for (int i = 0; i < result.Length; i++) 
             {
                 int centerLeftSpace = (Console.WindowWidth / 2) - (result[2].Length / 2);
-                Console.SetCursorPosition(centerLeftSpace - 7, 2+i);
+                Console.SetCursorPosition(centerLeftSpace, 2+i);
                 Console.Write(result[i]+ System.Environment.NewLine);
             }
             Console.ForegroundColor = ConsoleColor.White;
