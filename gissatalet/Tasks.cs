@@ -32,11 +32,11 @@
             {
                 string higschoreCreate = "Highscore doesn't existst, creating file....";
                 string complete = " Complete!";
-                SetCursor.SetXandWrite(higschoreCreate, 13);
+                SetCursor.SetXandWrite(higschoreCreate);
                 await File.WriteAllTextAsync(path, "");
                 Thread.Sleep(1000);
-                SetCursor.SetXandWrite(View.space, 13);
-                SetCursor.SetXandWrite(complete, 13);
+                SetCursor.SetXandWrite(View.space);
+                SetCursor.SetXandWrite(complete);
                 Thread.Sleep(200);
             }
             string[] HighScoreFile = await File.ReadAllLinesAsync(path);
