@@ -6,7 +6,6 @@
         public static string path = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "Spelare.txt");
         public static string fontPath = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "font.flf");
         public static int Xpos;
-
         public static async Task Setup() 
         {
             string loadingHigschore = "Loading Highscore.....";
@@ -82,10 +81,5 @@
                 await File.AppendAllTextAsync(path, appendText);
             }
         } 
-        public static async Task StoreHighscore() 
-        {
-            await File.WriteAllTextAsync(path, "");
-            foreach (var item in Users) await ToFile(item.score.ToString(), item.name.ToString(), item.tries.ToString());
-        }
     }
 }
