@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace gissatalet
 {
-    public class User
+    public sealed class User
     {
         public string name;
         public int score;
