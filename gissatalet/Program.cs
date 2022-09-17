@@ -20,14 +20,14 @@
             while (startaSpel == true)
             {
                 View.Front();
-                string userValue = Console.ReadLine();
+                string userValue = Console.ReadLine()!;
                 if (userValue == "1") View.NewGame();
                 if (userValue == "2") View.Highscore();
                 if (userValue == "3")
                 {
                     View.Init();
                     await File.WriteAllTextAsync(Tasks.path, "");
-                    foreach (var item in Tasks.users) await Tasks.ToFile(item.Item1.ToString(), item.Item2.ToString());
+                    foreach (var item in Tasks.Users) await Tasks.ToFile(item.score.ToString(), item.name, item.tries.ToString());
                     startaSpel = false;
                 }
             }

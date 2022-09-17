@@ -12,7 +12,7 @@ namespace gissatalet
 {
     internal sealed class Tasks
     {
-        public static List<Tuple<int, string>> users = new();
+        public static List<User> Users = new();
         public static string path = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "Spelare.txt");
         public static string fontPath = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "font.flf");
         public static int Xpos;
@@ -25,7 +25,7 @@ namespace gissatalet
             Console.ForegroundColor = ConsoleColor.DarkRed;
             SetCursor.SetXandWrite(loadingHigschore);
             Task.Delay(500).GetAwaiter().GetResult();
-            await Tasks.CreateHighscore(Tasks.users);
+            await Tasks.CreateHighscore(Tasks.Users);
             Task.Delay(500).GetAwaiter().GetResult();
             SetCursor.SetXandWrite(View.space);
             SetCursor.SetXandWrite(complete);
@@ -37,7 +37,7 @@ namespace gissatalet
             SetCursor.SetXandWrite(complete);
             Task.Delay(200).GetAwaiter().GetResult();
         }
-        public static async Task CreateHighscore(List<Tuple<int, string>> users)
+        public static async Task CreateHighscore(List<User> Users)
         {
             if (!File.Exists(path)) 
             {
@@ -55,7 +55,7 @@ namespace gissatalet
             {
                 string UnsplitUser = HighScoreFile[i];
                 String[] userData = UnsplitUser.Split(" | ");
-                users.Add(new Tuple<int, string>(Int32.Parse(userData[0]), userData[1]));
+                Users.Add(new User(userData[1], Int32.Parse(userData[0]), Int32.Parse(userData[2])));
             }
         }
         public static async Task DownloadFont()
@@ -82,20 +82,20 @@ namespace gissatalet
             }
             Console.ForegroundColor = ConsoleColor.White;
         }
-        public static async Task ToFile(string userScore, string name)
+        public static async Task ToFile(string userScore, string name, string tries)
         {
             string[] textFilePath = await File.ReadAllLinesAsync(path);
             List<string> textFile = new(textFilePath);
             if (!textFile.Contains(name))
             {
-                string appendText = userScore + " | " + name + Environment.NewLine;
+                string appendText = userScore + " | " + name + " | " + tries + Environment.NewLine;
                 await File.AppendAllTextAsync(path, appendText);
             }
         } 
         public static async Task StoreHighscore() 
         {
             await File.WriteAllTextAsync(path, "");
-            foreach (var item in users) await ToFile(item.Item1.ToString(), item.Item2.ToString());
+            foreach (var item in Users) await ToFile(item.score.ToString(), item.name.ToString(), item.tries.ToString());
         }
     }
 }
