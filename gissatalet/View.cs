@@ -59,7 +59,7 @@
                     Tasks.Users.Add(new User(name, 0, 0));
                     tempUserindex = Tasks.Users.Count()-1;
                 }
-                string UserBack = string.Format("Du {0} har {1} poäng på {2} försök", Tasks.Users[tempUserindex].name, Tasks.Users[tempUserindex].score, Tasks.Users[tempUserindex].tries);
+                string UserBack = string.Format("{0} har {1} poäng på {2} försök", Tasks.Users[tempUserindex].name, Tasks.Users[tempUserindex].score, Tasks.Users[tempUserindex].tries);
                 SetCursor.SetXandWrite(UserBack, 5);
                 SetCursor.SetXandWrite(space);
                 string gissaText = "Gissa ett nummer mellan 1 - 10";
@@ -83,7 +83,7 @@
                 {
                     slumpTal = slump.Next(1, 11);
                     ++Tasks.Users[tempUserindex].score;
-                    UserBack = string.Format("Du {0} har {1} poäng på {2} försök", Tasks.Users[tempUserindex].name, Tasks.Users[tempUserindex].score, Tasks.Users[tempUserindex].tries);
+                    UserBack = string.Format("{0} har {1} poäng på {2} försök", Tasks.Users[tempUserindex].name, Tasks.Users[tempUserindex].score, Tasks.Users[tempUserindex].tries);
                     Thread.Sleep(10);
                     string correct = "Du gissade rätt!";
                     string press = "Tryck på (N) för att avsluta eller, Tryck på valfri tangent för att fortsätta.";
