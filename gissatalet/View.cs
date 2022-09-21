@@ -28,6 +28,7 @@
             View.Meny();
             string makeAMove = strings.localization("MakeAMove");
             SetCursor.SetXandWrite(makeAMove, 5);
+            SetCursor.SetXandWrite("> ", 6);
             Console.CursorVisible = true;
         }
         public static void Meny()
