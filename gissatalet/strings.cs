@@ -6,7 +6,6 @@ namespace gissatalet
     {
         public string stringName;
         public string value;
-
         public strings(string stringName, string value)
         {
             this.stringName=stringName;

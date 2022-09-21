@@ -20,6 +20,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="RövarSpråket.Designer.cs">
+      <DependentUpon>RövarSpråket.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Svenska.Designer.cs">
       <DependentUpon>Svenska.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -35,6 +40,10 @@
   <ItemGroup>
     <EmbeddedResource Update="Français.resx">
       <LastGenOutput>Français.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="RövarSpråket.resx">
+      <LastGenOutput>RövarSpråket.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Svenska.resx">
