@@ -1,16 +1,20 @@
-﻿namespace gissatalet
+﻿using System.Resources.NetStandard;
+namespace gissatalet
 {
     internal sealed class Tasks
     {
         public static List<User> Users = new();
+        public static int lang = -1;
         public static string path = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "Spelare.txt");
         public static string fontPath = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "font.flf");
+        public static List<strings> Strings = new();
         public static int Xpos;
+        public static ResXResourceReader rR = new ResXResourceReader(@".\English.resx");
         public static async Task Setup() 
         {
-            string loadingHigschore = "Loading Highscore.....";
-            string loadingFont = "Downloading ascii font.....";
-            string complete = "Complete!";
+            string loadingHigschore = strings.localization("loadingHighscore");
+            string loadingFont = strings.localization("loadingFont");
+            string complete = strings.localization("complete");
             Console.ForegroundColor = ConsoleColor.DarkRed;
             SetCursor.SetXandWrite(loadingHigschore);
             Task.Delay(500).GetAwaiter().GetResult();
@@ -30,8 +34,8 @@
         {
             if (!File.Exists(path)) 
             {
-                string higschoreCreate = "Highscore doesn't existst, creating file....";
-                string complete = " Complete!";
+                string higschoreCreate = strings.localization("higschoreCreate");
+                string complete = strings.localization("complete");
                 SetCursor.SetXandWrite(higschoreCreate);
                 await File.WriteAllTextAsync(path, "");
                 Thread.Sleep(1000);
@@ -50,13 +54,14 @@
         public static async Task DownloadFont()
         {
             try {
-            HttpClient client = new();
-            var response = await client.GetStringAsync("https://raw.githubusercontent.com/xero/figlet-fonts/master/Bloody.flf");
-            await File.WriteAllTextAsync(fontPath, response.ToString());
+                HttpClient client = new();
+                var response = await client.GetStringAsync("https://raw.githubusercontent.com/xero/figlet-fonts/master/Bloody.flf");
+                await File.WriteAllTextAsync(fontPath, response.ToString());
+                client.CancelPendingRequests();
             }
             catch
             {
-                string error = "No internetconnection, using default font or past downloaded font.";
+                string error = strings.localization("loadingFontError");
                 SetCursor.SetXandWrite(error);
                 Thread.Sleep(200);
             }
@@ -77,6 +82,7 @@
                 Console.SetCursorPosition(centerLeftSpace, 2+i);
                 Console.Write(result[i]+ System.Environment.NewLine);
             }
+            fontStream.Close();
             Console.ForegroundColor = ConsoleColor.White;
         }
         public static async Task ToFile(string userScore, string name, string tries)

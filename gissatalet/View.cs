@@ -1,9 +1,8 @@
-﻿using System.Text;
-
-namespace gissatalet
+﻿namespace gissatalet
 {
-    public sealed class View
+    public sealed class View : IDisposable
     {
+
         public static readonly string[] spinner = 
         {
             "[    ]",
@@ -26,27 +25,27 @@ namespace gissatalet
         public static void Init() { Tasks.Xpos = 13; Console.Clear(); }
         public static void Front() 
         {
-            Tasks.Titel("Gissa Talet");
+            Tasks.Titel(strings.localization("TitleMain"));
             View.Meny();
-            string makeAMove = "Gör ett val: ";
+            string makeAMove = strings.localization("MakeAMove");
             SetCursor.SetXandWrite(makeAMove, 5);
             Console.CursorVisible = true;
         }
         public static void Meny()
         {
-            string optionOne = string.Format("1) Spela Gissa Talet!");
-            string optionTwo = string.Format("2) Se Highscore!");
-            string optionThree = string.Format("3) Avsluta :(");
+            string optionOne = string.Format(strings.localization("optionOne"));
+            string optionTwo = string.Format(strings.localization("optionTwo"));
+            string optionThree = string.Format(strings.localization("optionThree"));
             SetCursor.SetXandWrite(optionOne, 1);
             SetCursor.SetXandWrite(optionTwo, 2);
             SetCursor.SetXandWrite(optionThree, 3);
         }
         public static void NewGame()
         {
-            Tasks.Titel("NEW GAME!");
+            Tasks.Titel(strings.localization("TitleNewGame"));
             bool nyttSpel = true;
             Random slump = new();
-            string input = "Nu startas ett spel skriv ditt namn";
+            string input = strings.localization("input");
             SetCursor.SetXandWrite(input);
             SetCursor.SetXandWrite("> ", 1);
             string name = Console.ReadLine()!;
@@ -61,10 +60,10 @@ namespace gissatalet
                     Tasks.Users.Add(new User(name, 0, 0));
                     userIndex = Tasks.Users.Count()-1;
                 }
-                User.UserUi(userIndex);
+                strings.UserUi(userIndex);
                 SetCursor.SetXandWrite(space);
-                string gissaText = "Gissa ett nummer mellan 1 - 10";
-                SetCursor.SetXandWrite(gissaText);
+                string guessText = strings.localization("guessText");
+                SetCursor.SetXandWrite(guessText);
                 SetCursor.SetXandWrite(space, 1);
                 SetCursor.SetXandWrite(prompt, 1);
                 int gissning = 0;
@@ -77,16 +76,16 @@ namespace gissatalet
                 }
                 catch (FormatException)
                 {
-                    string error = "Du måste skriva in ett nummer!";
-                    SetCursor.SetXandWrite(error, 3);
+                    string guessError = strings.localization("guessError");
+                    SetCursor.SetXandWrite(guessError, 3);
                 }
                 if (gissning == slumpTal)
                 {
                     slumpTal = slump.Next(1, 11);
                     ++Tasks.Users[userIndex].score;
-                    User.UserUi(userIndex);
-                    string correct = "Du gissade rätt!";
-                    string press = "Tryck på (N) för att avsluta eller, Tryck på valfri tangent för att fortsätta.";
+                    strings.UserUi(userIndex);
+                    string correct = strings.localization("correct");
+                    string press = strings.localization("press");
                     SetCursor.SetXandWrite(space, -1);
                     SetCursor.SetXandWrite(correct, -1);
                     SetCursor.SetXandWrite(press);
@@ -102,13 +101,13 @@ namespace gissatalet
                 }
                 else if (gissning < slumpTal)
                 {
-                    string guessLow = "Du gissade lägre än talet.";
+                    string guessLow = strings.localization("guessLow");
                     SetCursor.SetXandWrite(space, -1);
                     SetCursor.SetXandWrite(guessLow, -1);
                 }
                 else
                 {
-                    string guessHigh = "Du gissade högre än talet.";
+                    string guessHigh = strings.localization("guessHigh");
                     SetCursor.SetXandWrite(space, -1);
                     SetCursor.SetXandWrite(guessHigh, -1);
                 }
@@ -118,13 +117,13 @@ namespace gissatalet
         public static void Highscore()
         {
             Console.CursorVisible = false;
-            Tasks.Titel("HighScore!");
+            Tasks.Titel(strings.localization("TitelHighscore"));
             var highScore = new List<Tuple<int, string, int>>();
             foreach (var user in Tasks.Users) highScore.Add(new Tuple<int, string, int>(user.score, user.name, user.tries));
             highScore.Sort((e1, e2) => { return (e1.Item3 / e1.Item1).CompareTo((e2.Item3 / e2.Item1)); }); 
-            string top3 = "De top 3 Bästa spelana";
+            string top3 = strings.localization("top3");
             SetCursor.SetXandWrite(top3);
-            string description = "POÄNG | NAMN | FÖRSÖK";
+            string description = strings.localization("description");
             SetCursor.SetXandWrite(description, 2);
             int next = 3;
             if (highScore.Count >= 3)
@@ -145,9 +144,38 @@ namespace gissatalet
                     SetCursor.SetXandWrite(user, ++next);
                 }
             }
-            string pressAny = "Tryck på valfri knapp för att återgå till huvudmenyn.";
+            string pressAny = strings.localization("pressAny");
             SetCursor.SetXandWrite(pressAny, 13);
             Console.ReadLine();
+        }
+        public static void LanguageSelection() 
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            bool selectlang = true;
+            while (selectlang == true)
+            {
+                string input = "Choose your prefered language:";
+                SetCursor.SetXandWrite(input);
+                string eng = "1) English";
+                string swe = "2) Swedish";
+                SetCursor.SetXandWrite(eng, 2);
+                SetCursor.SetXandWrite(swe, 3);
+                SetCursor.SetXandWrite("> ", 4);
+                try
+                {
+                    Tasks.lang = Int32.Parse(Console.ReadLine()!);
+                    selectlang = false;
+                }
+                catch
+                {
+                    string nothingSelect = "You have to choose a valid selection";
+                    SetCursor.SetXandWrite(nothingSelect, 6);
+                }
+            }
+        }
+        public void Dispose()
+        {
+            
         }
     }
 }

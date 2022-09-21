@@ -1,9 +1,12 @@
 ﻿namespace gissatalet
 {
+
     internal sealed class Program
     {
         static async Task Main(string[] args)
         {
+            View.Init();
+            strings.getAndUseLocalizationFiles();
             Console.CursorVisible = false;
             View.Init();
             var setup = Tasks.Setup();
