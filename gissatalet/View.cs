@@ -1,4 +1,6 @@
-﻿namespace gissatalet
+﻿using System.Text;
+
+namespace gissatalet
 {
     public sealed class View
     {
@@ -52,15 +54,14 @@
             int slumpTal = slump.Next(1, 11);
             while (nyttSpel == true)
             {
-                int tempUserindex = Tasks.Users.FindIndex(x => x.name == name);
+                int userIndex = Tasks.Users.FindIndex(x => x.name == name);
                 string prompt = "> ";
-                if (tempUserindex == -1)
+                if (userIndex == -1)
                 {
                     Tasks.Users.Add(new User(name, 0, 0));
-                    tempUserindex = Tasks.Users.Count()-1;
+                    userIndex = Tasks.Users.Count()-1;
                 }
-                string UserBack = string.Format("{0} har {1} poäng på {2} försök", Tasks.Users[tempUserindex].name, Tasks.Users[tempUserindex].score, Tasks.Users[tempUserindex].tries);
-                SetCursor.SetXandWrite(UserBack, 5);
+                User.UserUi(userIndex);
                 SetCursor.SetXandWrite(space);
                 string gissaText = "Gissa ett nummer mellan 1 - 10";
                 SetCursor.SetXandWrite(gissaText);
@@ -72,7 +73,7 @@
                 {
                     SetCursor.SetXandWrite(space, 3);
                     gissning = Int32.Parse(aGissning);
-                    ++Tasks.Users[tempUserindex].tries;
+                    ++Tasks.Users[userIndex].tries;
                 }
                 catch (FormatException)
                 {
@@ -82,12 +83,10 @@
                 if (gissning == slumpTal)
                 {
                     slumpTal = slump.Next(1, 11);
-                    ++Tasks.Users[tempUserindex].score;
-                    UserBack = string.Format("{0} har {1} poäng på {2} försök", Tasks.Users[tempUserindex].name, Tasks.Users[tempUserindex].score, Tasks.Users[tempUserindex].tries);
-                    Thread.Sleep(10);
+                    ++Tasks.Users[userIndex].score;
+                    User.UserUi(userIndex);
                     string correct = "Du gissade rätt!";
                     string press = "Tryck på (N) för att avsluta eller, Tryck på valfri tangent för att fortsätta.";
-                    SetCursor.SetXandWrite(UserBack, 5);
                     SetCursor.SetXandWrite(space, -1);
                     SetCursor.SetXandWrite(correct, -1);
                     SetCursor.SetXandWrite(press);

@@ -49,9 +49,17 @@
         }
         public static async Task DownloadFont()
         {
+            try {
             HttpClient client = new();
             var response = await client.GetStringAsync("https://raw.githubusercontent.com/xero/figlet-fonts/master/Bloody.flf");
             await File.WriteAllTextAsync(fontPath, response.ToString());
+            }
+            catch
+            {
+                string error = "No internetconnection, using default font or past downloaded font.";
+                SetCursor.SetXandWrite(error);
+                Thread.Sleep(200);
+            }
         }
         public static void Titel(string titelText)
         {
