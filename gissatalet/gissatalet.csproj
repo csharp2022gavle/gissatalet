@@ -15,8 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Swedish.Designer.cs">
-      <DependentUpon>Swedish.resx</DependentUpon>
+    <Compile Update="Français.Designer.cs">
+      <DependentUpon>Français.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Svenska.Designer.cs">
+      <DependentUpon>Svenska.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
@@ -28,8 +33,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Swedish.resx">
-      <LastGenOutput>Swedish.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Français.resx">
+      <LastGenOutput>Français.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Svenska.resx">
+      <LastGenOutput>Svenska.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="English.resx">

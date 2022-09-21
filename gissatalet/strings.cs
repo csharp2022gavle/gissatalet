@@ -14,7 +14,7 @@ namespace gissatalet
         }
         public static void getAndUseLocalizationFiles()
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             string sourceDirectory = @".\";
             var languageFiles = Directory.EnumerateFiles(sourceDirectory, "*.resx");
             int currentSelection = 0;

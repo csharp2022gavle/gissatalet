@@ -22,14 +22,14 @@ namespace gissatalet {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Swedish {
+    public class Français {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Swedish() {
+        internal Français() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace gissatalet {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("gissatalet.Swedish", typeof(Swedish).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("gissatalet.Français", typeof(Français).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Klar!.
+        ///   Looks up a localized string similar to Dégager!.
         /// </summary>
         public static string complete {
             get {
@@ -70,7 +70,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Du gissade rätt!.
+        ///   Looks up a localized string similar to Vous avez bien deviné !.
         /// </summary>
         public static string correct {
             get {
@@ -79,7 +79,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Poäng | Namn | Försök.
+        ///   Looks up a localized string similar to Points | Nom | Tentative.
         /// </summary>
         public static string description {
             get {
@@ -88,7 +88,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Du måste skriva in ett nummer!.
+        ///   Looks up a localized string similar to Vous devez entrer un nombre !.
         /// </summary>
         public static string guessError {
             get {
@@ -97,7 +97,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Du gissade högre än talet..
+        ///   Looks up a localized string similar to Vous avez deviné supérieur au nombre..
         /// </summary>
         public static string guessHigh {
             get {
@@ -106,7 +106,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Du gissade lägre än talet..
+        ///   Looks up a localized string similar to Vous avez deviné inférieur au nombre..
         /// </summary>
         public static string guessLow {
             get {
@@ -115,7 +115,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gissa ett nummer mellan 1 - 10.
+        ///   Looks up a localized string similar to Devinez un nombre entre 1 et 10.
         /// </summary>
         public static string guessText {
             get {
@@ -124,7 +124,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Highscore finns inte, skapar fil....
+        ///   Looks up a localized string similar to Le meilleur score n&apos;existe pas, création du fichier....
         /// </summary>
         public static string higschoreCreate {
             get {
@@ -133,7 +133,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nu startas ett spel skriv ditt namn:.
+        ///   Looks up a localized string similar to Maintenant, une partie est lancée, entrez votre nom:.
         /// </summary>
         public static string input {
             get {
@@ -142,7 +142,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Laddar ner ASCII Font.
+        ///   Looks up a localized string similar to Télécharger la police ASCII.
         /// </summary>
         public static string loadingFont {
             get {
@@ -151,7 +151,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ingen internetanslutning hittades. Använder tidigare typsnitt eller default..
+        ///   Looks up a localized string similar to Aucune connexion Internet trouvée. Utilise la police précédente ou par défaut..
         /// </summary>
         public static string loadingFontError {
             get {
@@ -160,7 +160,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Laddar Highscore.....
+        ///   Looks up a localized string similar to Chargement des meilleurs scores.....
         /// </summary>
         public static string loadingHighscore {
             get {
@@ -169,7 +169,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gör ett val: .
+        ///   Looks up a localized string similar to Fais un choix:.
         /// </summary>
         public static string MakeAMove {
             get {
@@ -178,7 +178,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1) Spela Gissa Talet!.
+        ///   Looks up a localized string similar to 1) Jouez à Devinez le nombre !.
         /// </summary>
         public static string optionOne {
             get {
@@ -187,7 +187,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 3) Avsluta :(.
+        ///   Looks up a localized string similar to 3) Quittez :(.
         /// </summary>
         public static string optionThree {
             get {
@@ -196,7 +196,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 2) Se Highscore!.
+        ///   Looks up a localized string similar to 2) Voir les meilleurs scores !.
         /// </summary>
         public static string optionTwo {
             get {
@@ -205,7 +205,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tryck på (N) för att avsluta eller, Tryck på valfri tangent för att fortsätta..
+        ///   Looks up a localized string similar to Appuyez sur (N) pour quitter ou appuyez sur n&apos;importe quelle touche pour continuer..
         /// </summary>
         public static string press {
             get {
@@ -214,7 +214,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tryck på valfri knapp för att återgå till huvudmenyn.
+        ///   Looks up a localized string similar to Appuyez sur n&apos;importe quelle touche pour revenir au menu principal.
         /// </summary>
         public static string pressAny {
             get {
@@ -223,7 +223,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HighScore!.
+        ///   Looks up a localized string similar to Score élevé!.
         /// </summary>
         public static string TitelHighscore {
             get {
@@ -232,7 +232,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gissa Talet.
+        ///   Looks up a localized string similar to le nombre.
         /// </summary>
         public static string TitleMain {
             get {
@@ -241,7 +241,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NEW GAME!.
+        ///   Looks up a localized string similar to NOUVEAU JEU!.
         /// </summary>
         public static string TitleNewGame {
             get {
@@ -250,7 +250,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to De top 3 Bästa spelana.
+        ///   Looks up a localized string similar to Le top 3 des meilleurs jeux.
         /// </summary>
         public static string top3 {
             get {
@@ -259,7 +259,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to har.
+        ///   Looks up a localized string similar to ont.
         /// </summary>
         public static string userBackHas {
             get {
@@ -268,7 +268,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to poäng på.
+        ///   Looks up a localized string similar to points sur.
         /// </summary>
         public static string userBackScore {
             get {
@@ -277,7 +277,7 @@ namespace gissatalet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to försök.
+        ///   Looks up a localized string similar to tentative.
         /// </summary>
         public static string userBackTries {
             get {
