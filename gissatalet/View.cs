@@ -2,7 +2,6 @@
 {
     public sealed class View : IDisposable
     {
-
         public static readonly string[] spinner = 
         {
             "[    ]",
@@ -147,31 +146,6 @@
             string pressAny = strings.localization("pressAny");
             SetCursor.SetXandWrite(pressAny, 13);
             Console.ReadLine();
-        }
-        public static void LanguageSelection() 
-        {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            bool selectlang = true;
-            while (selectlang == true)
-            {
-                string input = "Choose your prefered language:";
-                SetCursor.SetXandWrite(input);
-                string eng = "1) English";
-                string swe = "2) Swedish";
-                SetCursor.SetXandWrite(eng, 2);
-                SetCursor.SetXandWrite(swe, 3);
-                SetCursor.SetXandWrite("> ", 4);
-                try
-                {
-                    Tasks.lang = Int32.Parse(Console.ReadLine()!);
-                    selectlang = false;
-                }
-                catch
-                {
-                    string nothingSelect = "You have to choose a valid selection";
-                    SetCursor.SetXandWrite(nothingSelect, 6);
-                }
-            }
         }
         public void Dispose()
         {
