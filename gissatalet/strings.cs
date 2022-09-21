@@ -19,7 +19,7 @@ namespace gissatalet
             int currentSelection = 0;
             List<string> files = new List<string>();
             string input = "Choose your prefered language:";
-            SetCursor.SetXandWrite(input);
+            SetCursor.SetXandWrite(input, -1);
             foreach (string selection in languageFiles) 
             {
                 string choice = selection.Remove(0,2).Remove(selection.Length -7);
@@ -28,6 +28,7 @@ namespace gissatalet
                 SetCursor.SetXandWrite(selectionValue, currentSelection+1);
                 ++currentSelection;
             }
+            Console.ForegroundColor = ConsoleColor.White;
             SetCursor.SetXandWrite("> ", files.Count + 2);
             bool isRunning = true;
             while (isRunning == true) 
