@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Resources.NetStandard;
 
-namespace gissatalet.Tasks
+namespace gissatalet.models
 {
     public class Strings
     {
@@ -69,7 +69,7 @@ namespace gissatalet.Tasks
         }
         public static void UserUi(int index)
         {
-            string UserBack = string.Format("{0} {1} {2} {3} {4} {5}", Tasks.Users[index].name, Localization("userBackHas"), Tasks.Users[index].score, Localization("userBackScore"), Tasks.Users[index].tries, Localization("userBackTries"));
+            string UserBack = string.Format("{0} {1} {2} {3} {4} {5}", Tasks.Users[index].Name, Localization("userBackHas"), Tasks.Users[index].Score, Localization("userBackScore"), Tasks.Users[index].Tries, Localization("userBackTries"));
             SetCursor.SetXandWrite(UserBack, 5);
         }
     }

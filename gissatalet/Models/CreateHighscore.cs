@@ -1,4 +1,4 @@
-﻿using gissatalet.Views;
+﻿using gissatalet.views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gissatalet.Tasks
+namespace gissatalet.models
 {
     internal class CreateHighscore
     {
-        public static async Task MainTask(List<User> Users)
+        public static async Task MainTask(List<user.User> Users)
         {
             if (!File.Exists(Tasks.path))
             {
@@ -19,7 +19,7 @@ namespace gissatalet.Tasks
                 SetCursor.SetXandWrite(higschoreCreate);
                 await File.WriteAllTextAsync(Tasks.path, "");
                 Thread.Sleep(1000);
-                SetCursor.SetXandWrite(Views.Views.space);
+                SetCursor.SetXandWrite(views.Views.space);
                 SetCursor.SetXandWrite(complete);
                 Thread.Sleep(200);
             }
@@ -28,7 +28,7 @@ namespace gissatalet.Tasks
             {
                 string UnsplitUser = HighScoreFile[i];
                 string[] userData = UnsplitUser.Split(" | ");
-                Users.Add(new User(userData[1], int.Parse(userData[0]), int.Parse(userData[2])));
+                Users.Add(new user.User(userData[1], int.Parse(userData[0]), int.Parse(userData[2])));
             }
         }
     }

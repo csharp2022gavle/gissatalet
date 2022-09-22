@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using gissatalet.Tasks;
+using gissatalet.models;
 
-namespace gissatalet.Views
+namespace gissatalet.views
 {
     internal class Menu
     {

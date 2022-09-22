@@ -1,23 +1,23 @@
-﻿using gissatalet.Views;
+﻿using gissatalet.views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
-namespace gissatalet.Tasks
+namespace gissatalet.models
 {
     internal class Titel
     {
         public static void MainTask(string titelText)
         {
-            Views.Views.Init();
+            views.Views.Init();
             Stream fontStream;
             fontStream = new FileStream(Tasks.fontPath, FileMode.Open, FileAccess.Read);
             var font = new WenceyWang.FIGlet.FIGletFont(fontStream);
             var text = new WenceyWang.FIGlet.AsciiArt(titelText, font: font);
             text.ToString(); var result = text.Result;
-            Console.WriteLine(Views.Views.space);
+            Console.WriteLine(views.Views.space);
             Console.ForegroundColor = ConsoleColor.DarkRed;
             for (int i = 0; i < result.Length; i++)
             {

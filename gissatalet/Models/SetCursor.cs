@@ -1,4 +1,4 @@
-﻿namespace gissatalet.Tasks
+﻿namespace gissatalet.models
 {
     internal sealed class SetCursor
     {

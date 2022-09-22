@@ -1,4 +1,4 @@
-﻿namespace gissatalet.Views
+﻿namespace gissatalet.views
 {
     public sealed class Views : IDisposable
     {
@@ -21,7 +21,7 @@
             "[=   ]"
         };
         public static string space = "                                                                                    ";
-        public static void Init() { Tasks.Tasks.Xpos = 13; Console.Clear(); }
+        public static void Init() { models.Tasks.Xpos = 13; Console.Clear(); }
         public void Dispose()
         {
 

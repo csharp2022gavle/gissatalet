@@ -12,6 +12,8 @@
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="FIGlet.Net" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
+    <PackageReference Include="MongoDB.Bson" Version="2.17.1" />
+    <PackageReference Include="MongoDB.Driver" Version="2.17.1" />
     <PackageReference Include="ResXResourceReader.NetStandard" Version="1.1.0" />
   </ItemGroup>
 
@@ -59,6 +61,12 @@
       <LastGenOutput>English.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

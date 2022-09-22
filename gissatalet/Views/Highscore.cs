@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using gissatalet.Tasks;
+using gissatalet.models;
 
-namespace gissatalet.Views
+namespace gissatalet.views
 {
     internal class Highscore
     {
         public static void MainTask()
         {
             Console.CursorVisible = false;
-            Tasks.Titel.MainTask(Strings.Localization("TitelHighscore"));
+            models.Titel.MainTask(Strings.Localization("TitelHighscore"));
             var highScore = new List<Tuple<int, string, int>>();
-            foreach (var user in Tasks.Tasks.Users) highScore.Add(new Tuple<int, string, int>(user.score, user.name, user.tries));
+            foreach (var user in models.Tasks.Users) highScore.Add(new Tuple<int, string, int>(user.Score, user.Name, user.Tries));
             highScore.Sort((e1, e2) => { return (e1.Item3 / e1.Item1).CompareTo(e2.Item3 / e2.Item1); });
             string top3 = Strings.Localization("top3");
             SetCursor.SetXandWrite(top3);

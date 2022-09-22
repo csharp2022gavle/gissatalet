@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using gissatalet.Tasks;
+using gissatalet.models;
 
-namespace gissatalet.Views
+namespace gissatalet.views
 {
     internal class NewGame
     {
         public static void MainTask()
         {
-            Tasks.Titel.MainTask(Strings.Localization("TitleNewGame"));
+            models.Titel.MainTask(Strings.Localization("TitleNewGame"));
             bool nyttSpel = true;
             Random slump = new();
             string input = Strings.Localization("input");
@@ -22,12 +22,12 @@ namespace gissatalet.Views
             int slumpTal = slump.Next(1, 11);
             while (nyttSpel == true)
             {
-                int userIndex = Tasks.Tasks.Users.FindIndex(x => x.name == name);
+                int userIndex = models.Tasks.Users.FindIndex(x => x.Name == name);
                 string prompt = "> ";
                 if (userIndex == -1)
                 {
-                    Tasks.Tasks.Users.Add(new User(name, 0, 0));
-                    userIndex = Tasks.Tasks.Users.Count() - 1;
+                    models.Tasks.Users.Add(new user.User(name, 0, 0));
+                    userIndex = models.Tasks.Users.Count - 1;
                 }
                 Strings.UserUi(userIndex);
                 SetCursor.SetXandWrite(Views.space);
@@ -41,7 +41,7 @@ namespace gissatalet.Views
                 {
                     SetCursor.SetXandWrite(Views.space, 3);
                     gissning = int.Parse(aGissning);
-                    ++Tasks.Tasks.Users[userIndex].tries;
+                    ++models.Tasks.Users[userIndex].Tries;
                 }
                 catch (FormatException)
                 {
@@ -51,7 +51,7 @@ namespace gissatalet.Views
                 if (gissning == slumpTal)
                 {
                     slumpTal = slump.Next(1, 11);
-                    ++Tasks.Tasks.Users[userIndex].score;
+                    ++models.Tasks.Users[userIndex].Score;
                     Strings.UserUi(userIndex);
                     string correct = Strings.Localization("correct");
                     string press = Strings.Localization("press");
