@@ -1,36 +1,40 @@
-﻿namespace gissatalet
+﻿using System.Threading.Channels;
+using gissatalet.Tasks;
+using gissatalet.Views;
+
+namespace gissatalet
 {
 
     internal sealed class Program
     {
         static async Task Main(string[] args)
         {
-            View.Init();
-            strings.getAndUseLocalizationFiles();
+            Views.Views.Init();
+            Strings.GetAndUseLocalizationFiles();
             Console.CursorVisible = false;
-            View.Init();
-            var setup = Tasks.Setup();
+            Views.Views.Init();
+            var setup = Tasks.Setup.MainTask();
             while (setup.IsCompleted == false) 
             {
-                for (int i = 0; i < View.spinner.Length ; i++)
+                for (int i = 0; i < Views.Views.spinner.Length ; i++)
                 {
                     Thread.Sleep(20);
-                    SetCursor.SetXandWrite(View.spinner[i], 3);
+                    SetCursor.SetXandWrite(Views.Views.spinner[i], 3);
                 }  
             }
             await setup;
             bool startaSpel = true;
             while (startaSpel == true)
             {
-                View.Front();
+                Views.Front.MainTask();
                 string userValue = Console.ReadLine()!;
-                if (userValue == "1") View.NewGame();
-                if (userValue == "2") View.Highscore();
+                if (userValue == "1") Views.NewGame.MainTask();
+                if (userValue == "2") Views.Highscore.MainTask();
                 if (userValue == "3")
                 {
-                    View.Init();
-                    await File.WriteAllTextAsync(Tasks.path, "");
-                    foreach (var item in Tasks.Users) await Tasks.ToFile(item.score.ToString(), item.name, item.tries.ToString());
+                    Views.Views.Init();
+                    await File.WriteAllTextAsync(Tasks.Tasks.path, "");
+                    foreach (var item in Tasks.Tasks.Users) await Tasks.ToFile.MainTask(item.score.ToString(), item.name, item.tries.ToString());
                     startaSpel = false;
                 }
             }

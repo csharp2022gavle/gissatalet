@@ -1,6 +1,6 @@
 ﻿namespace gissatalet
 {
-    public sealed class User
+    public class User
     {
         public string name;
         public int score;
