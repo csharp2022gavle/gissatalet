@@ -4,7 +4,6 @@ using gissatalet.views;
 
 namespace gissatalet
 {
-
     internal sealed class Program
     {
         static async Task Main(string[] args)

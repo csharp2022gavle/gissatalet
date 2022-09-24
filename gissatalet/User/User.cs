@@ -16,27 +16,27 @@ namespace gissatalet.user
             get { return _id; } 
             set { _id = value; }
         }
-
-        [BsonElement("User")]
-
+        [BsonElement("Name")]
         public string Name 
         {
             get { return _name; }
             set { _name = value; }
         }
+        [BsonElement("Password")]
         public string Password
         {
             get { return _password; }
             set { _password = value; }
         }
-
+        [BsonElement("PasswordVerified")]
         public bool PasswordVerified
         {
             get { return _passwordVerified; }
             set { _passwordVerified = value; }
         }
-
+        [BsonElement("Score")]
         public int Score { get; set; }
+        [BsonElement("Tries")]
         public int Tries { get; set; }
 
         public User(string name, int score, int tries)

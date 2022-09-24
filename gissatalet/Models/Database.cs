@@ -5,18 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace gissatalet.Models
 {
     internal class Database
     {
-        static IConfiguration conf = (new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build());
-        public static string connectionString = conf["GissataletDatabase:ConnectionString"].ToString();
-        public static string databaseName = conf["GissataletDatabase:DatabaseName"].ToString();
-        public static string collectionName = conf["GissataletDatabase:UserCollectionName"].ToString();
-
         public static async Task setup() 
         {
+            var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
+            string connectionString = config["Database:ConnectionString"];
+            string databaseName = config["Database:DatabaseName"];
+            string collectionName = config["Database:DatabaseCollection"];
             var client = new MongoClient(connectionString);
             var db = client.GetDatabase(databaseName);
             var collection = db.GetCollection<user.User>(collectionName);

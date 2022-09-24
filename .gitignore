@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/GissataletAPI/appsettings.json
+/GissataletAPI/appsettings.Development.json
+/.dockerignore
+/GissataletAPI/Dockerfile
