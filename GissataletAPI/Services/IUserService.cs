@@ -7,6 +7,6 @@ namespace User_Information_API.Services
         User Get(string id);
         User Create(User user);
         void Update(string id, User user);
-        void Remove(string id);
+        //void Remove(string id);
     }
 }

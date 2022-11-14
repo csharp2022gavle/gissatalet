@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 
-namespace gissatalet.Models
+namespace gissatalet.models
 {
     internal class Database
     {

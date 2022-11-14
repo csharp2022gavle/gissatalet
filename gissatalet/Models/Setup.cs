@@ -1,4 +1,4 @@
-﻿using gissatalet.Models;
+﻿using gissatalet.models;
 using gissatalet.views;
 using Microsoft.Extensions.Configuration;
 using System;

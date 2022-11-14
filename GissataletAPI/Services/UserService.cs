@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using User_Information_API.Models;
 namespace User_Information_API.Services
 {
@@ -20,18 +21,18 @@ namespace User_Information_API.Services
 
         public List<User> Get()
         {
-            return _Users.Find(User => true).ToList();
+            return _Users.Find(User => true).Project(x => new User{ Id = x.Id, Name = x.Name, Score = x.Score, Tries = x.Tries } ).ToList();
         }
 
         public User Get(string id)
         {
-            return _Users.Find(User => User.Id == id).FirstOrDefault();
+            return _Users.Find(User => User.Id == id).Project(x => new User { Id = x.Id, Name = x.Name, Score = x.Score, Tries = x.Tries }).FirstOrDefault();
         }
 
-        public void Remove(string id)
-        {
-            _Users.DeleteOne(User => User.Id == id);
-        }
+        //public void Remove(string id)
+        //{
+        //    _Users.DeleteOne(User => User.Id == id);
+        //}
 
         public void Update(string id, User User)
         {

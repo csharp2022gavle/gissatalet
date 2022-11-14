@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
 
 namespace User_Information_API.Models
 {
@@ -11,8 +12,6 @@ namespace User_Information_API.Models
         public string? Name { get; set; }
         [BsonElement("Password")]
         public string? Password { get; set; }
-        [BsonElement("PasswordVerified")]
-        public string? PasswordVerified { get; set; }
         [BsonElement("Score")]
         public string? Score { get; set; }
         [BsonElement("Tries")]

@@ -9,7 +9,6 @@ namespace gissatalet.user
         private ObjectId _id;
         private string _name;
         private string _password;
-        private bool _passwordVerified;
 
         public ObjectId Id 
         {
@@ -27,12 +26,6 @@ namespace gissatalet.user
         {
             get { return _password; }
             set { _password = value; }
-        }
-        [BsonElement("PasswordVerified")]
-        public bool PasswordVerified
-        {
-            get { return _passwordVerified; }
-            set { _passwordVerified = value; }
         }
         [BsonElement("Score")]
         public int Score { get; set; }

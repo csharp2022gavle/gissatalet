@@ -16,6 +16,7 @@ namespace User_Information_API.Controllers
         [HttpGet]
         public ActionResult<List<User>> Get()
         {
+            var user = userService.Get();
             return userService.Get();
         }
         [HttpPost]
@@ -36,7 +37,7 @@ namespace User_Information_API.Controllers
             return user;
         }
         [HttpPut("{id}")]
-        public ActionResult Put(string id, [FromBody] User user) 
+        public ActionResult Put(string id, [FromBody] User user, string password) 
         {
             var existingUser = userService.Get(id);
 
@@ -44,23 +45,31 @@ namespace User_Information_API.Controllers
             {
                 return NotFound($"User with ID = {id} not found");
             }
-
-            userService.Update(id, user);
+            bool correctPassword = false;
+            correctPassword = Hashing.ValidatePassword(userService.Get(id).Password!, password);
+            if (correctPassword == true)
+            {
+                userService.Update(id, user);
+            }
+            else if (correctPassword == false) 
+            {
+                return NotFound("Wrong password");
+            }
             return NoContent();
         }
-        [HttpDelete("{id}")]
-        public ActionResult Delete(string id) 
-        {
-            var user = userService.Get(id);
+        //[HttpDelete("{id}")]
+        //public ActionResult Delete(string id) 
+        //{
+        //    var user = userService.Get(id);
 
-            if (user == null)
-            {
-                return NotFound($"User with ID = {id} not found");
-            }
+        //    if (user == null)
+        //    {
+        //        return NotFound($"User with ID = {id} not found");
+        //    }
 
-            userService.Remove(user.Id);
+        //    userService.Remove(user.Id);
 
-            return Ok($"User with Id = {id} deleted");
-        }
+        //    return Ok($"User with Id = {id} deleted");
+        //}
     }
 }
