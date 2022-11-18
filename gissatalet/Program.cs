@@ -1,5 +1,4 @@
-﻿using System.Threading.Channels;
-using gissatalet.models;
+﻿using gissatalet.models;
 using gissatalet.views;
 
 namespace gissatalet
@@ -8,32 +7,32 @@ namespace gissatalet
     {
         static async Task Main(string[] args)
         {
-            views.Views.Init();
-            models.Strings.GetAndUseLocalizationFiles();
+            Views.Init();
+            Strings.GetAndUseLocalizationFiles();
             Console.CursorVisible = false;
-            views.Views.Init();
-            var setup = models.Setup.MainTask();
+            Views.Init();
+            var setup = Setup.MainTask();
             while (setup.IsCompleted == false) 
             {
-                for (int i = 0; i < views.Views.spinner.Length ; i++)
+                for (int i = 0; i < Views.Spinner.Length ; i++)
                 {
                     Thread.Sleep(20);
-                    SetCursor.SetXandWrite(views.Views.spinner[i], 3);
+                    SetCursor.SetXandWrite(Views.Spinner[i], 3);
                 }  
             }
             await setup;
             bool startaSpel = true;
-            while (startaSpel == true)
+            while (startaSpel)
             {
-                views.Front.MainTask();
+                Front.MainTask();
                 string userValue = Console.ReadLine()!;
-                if (userValue == "1") views.NewGame.MainTask();
-                if (userValue == "2") views.Highscore.MainTask();
+                if (userValue == "1") NewGame.MainTask();
+                if (userValue == "2") Highscore.MainTask();
                 if (userValue == "3")
                 {
-                    views.Views.Init();
-                    await File.WriteAllTextAsync(models.Tasks.path, "");
-                    foreach (var item in models.Tasks.Users) await models.ToFile.MainTask(item.Score.ToString(), item.Name, item.Tries.ToString());
+                    Views.Init();
+                    await File.WriteAllTextAsync(Tasks.Path, "");
+                    foreach (var item in Tasks.Users) await ToFile.MainTask(item.Score.ToString(), item.Name, item.Tries.ToString());
                     startaSpel = false;
                 }
             }

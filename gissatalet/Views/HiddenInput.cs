@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace gissatalet.views
+﻿namespace gissatalet.views
 {
     internal class HiddenInput
     {
@@ -18,7 +12,7 @@ namespace gissatalet.views
                 if (keyinfo.Key != ConsoleKey.Backspace && keyinfo.Key != ConsoleKey.Enter)
                 {
                     hiddenInfo += keyinfo.KeyChar;
-                    Console.Write("*");
+                    Console.Write(@"*");
                 }
                 else 
                 {
@@ -26,7 +20,7 @@ namespace gissatalet.views
                     {
                         hiddenInfo = hiddenInfo.Substring(0, hiddenInfo.Length - 1);
                         Console.SetCursorPosition(pos.Left -1, pos.Top);
-                        Console.Write(" ");
+                        Console.Write(@" ");
                         Console.SetCursorPosition(pos.Left -1, pos.Top);
                     }
                 }

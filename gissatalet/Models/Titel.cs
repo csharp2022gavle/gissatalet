@@ -1,11 +1,4 @@
-﻿using gissatalet.views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-
-namespace gissatalet.models
+﻿namespace gissatalet.models
 {
     internal class Titel
     {
@@ -13,11 +6,11 @@ namespace gissatalet.models
         {
             views.Views.Init();
             Stream fontStream;
-            fontStream = new FileStream(Tasks.fontPath, FileMode.Open, FileAccess.Read);
+            fontStream = new FileStream(Tasks.FontPath, FileMode.Open, FileAccess.Read);
             var font = new WenceyWang.FIGlet.FIGletFont(fontStream);
             var text = new WenceyWang.FIGlet.AsciiArt(titelText, font: font);
             text.ToString(); var result = text.Result;
-            Console.WriteLine(views.Views.space);
+            Console.WriteLine(views.Views.Space);
             Console.ForegroundColor = ConsoleColor.DarkRed;
             for (int i = 0; i < result.Length; i++)
             {

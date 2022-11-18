@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace gissatalet.models
+﻿namespace gissatalet.models
 {
     internal class DownloadFont
     {
@@ -14,7 +8,7 @@ namespace gissatalet.models
             {
                 HttpClient client = new();
                 var response = await client.GetStringAsync("https://raw.githubusercontent.com/xero/figlet-fonts/master/Bloody.flf");
-                await File.WriteAllTextAsync(Tasks.fontPath, response.ToString());
+                await File.WriteAllTextAsync(Tasks.FontPath, response.ToString());
                 client.CancelPendingRequests();
             }
             catch

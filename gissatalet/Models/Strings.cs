@@ -5,12 +5,12 @@ namespace gissatalet.models
 {
     public class Strings
     {
-        public string stringName;
-        public string value;
+        public string StringName;
+        public string Value;
         public Strings(string stringName, string value)
         {
-            this.stringName = stringName;
-            this.value = value;
+            StringName = stringName;
+            Value = value;
         }
         public static void GetAndUseLocalizationFiles()
         {
@@ -32,7 +32,7 @@ namespace gissatalet.models
             Console.ForegroundColor = ConsoleColor.White;
             SetCursor.SetXandWrite("> ", files.Count + 2);
             bool isRunning = true;
-            while (isRunning == true)
+            while (isRunning)
             {
                 try
                 {
@@ -43,15 +43,15 @@ namespace gissatalet.models
                         ++index;
                         if (userValue == index)
                         {
-                            Tasks.rR.Close();
+                            Tasks.RR.Close();
                             Tasks.Strings.Clear();
-                            Tasks.rR = new ResXResourceReader(string.Format(@".\{0}.resx", files[index - 1]));
-                            foreach (DictionaryEntry strings in Tasks.rR)
+                            Tasks.RR = new ResXResourceReader(string.Format(@".\{0}.resx", files[index - 1]));
+                            foreach (DictionaryEntry strings in Tasks.RR)
                             {
                                 Tasks.Strings.Add(new Strings((string)strings.Key, (string)strings.Value!));
                             }
                             isRunning = false;
-                            Tasks.rR.Close();
+                            Tasks.RR.Close();
                         }
                     }
                 }
@@ -64,13 +64,13 @@ namespace gissatalet.models
         }
         public static string Localization(string name)
         {
-            int index = Tasks.Strings.FindIndex(x => x.stringName == name);
-            return Tasks.Strings[index].value;
+            int index = Tasks.Strings.FindIndex(x => x.StringName == name);
+            return Tasks.Strings[index].Value;
         }
         public static void UserUi(int index)
         {
-            string UserBack = string.Format("{0} {1} {2} {3} {4} {5}", Tasks.Users[index].Name, Localization("userBackHas"), Tasks.Users[index].Score, Localization("userBackScore"), Tasks.Users[index].Tries, Localization("userBackTries"));
-            SetCursor.SetXandWrite(UserBack, 5);
+            string userBack = string.Format("{0} {1} {2} {3} {4} {5}", Tasks.Users[index].Name, Localization("userBackHas"), Tasks.Users[index].Score, Localization("userBackScore"), Tasks.Users[index].Tries, Localization("userBackTries"));
+            SetCursor.SetXandWrite(userBack, 5);
         }
     }
 }

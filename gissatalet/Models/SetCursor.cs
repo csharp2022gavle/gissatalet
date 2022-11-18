@@ -2,15 +2,15 @@
 {
     internal sealed class SetCursor
     {
-        public static WindowWidth windowWidth = new();
+        public static WindowWidth WindowWidth = new();
         public static void SetXandWrite(string setWord)
         {
-            Console.SetCursorPosition(windowWidth.SetWidth(setWord), windowWidth.SetXpos());
+            Console.SetCursorPosition(WindowWidth.SetWidth(setWord), WindowWidth.SetXpos());
             Console.Write(setWord);
         }
         public static void SetXandWrite(string setWord, int setNewXpos)
         {
-            Console.SetCursorPosition(windowWidth.SetWidth(setWord), windowWidth.SetXpos(setNewXpos));
+            Console.SetCursorPosition(WindowWidth.SetWidth(setWord), WindowWidth.SetXpos(setNewXpos));
             Console.Write(setWord);
         }
     }

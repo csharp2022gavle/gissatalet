@@ -1,17 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
 
 namespace gissatalet.models
 {
     internal class Database
     {
-        public static async Task setup() 
+        public static async Task Setup() 
         {
             var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
             string connectionString = config["Database:ConnectionString"];
@@ -23,7 +17,7 @@ namespace gissatalet.models
             var results = await collection.FindAsync(_ => true);
             foreach (var result in results.ToList()) 
             {
-                models.Tasks.Users.Add(result);
+                Tasks.Users.Add(result);
             }
         }
 

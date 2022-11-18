@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using gissatalet.models;
+﻿using gissatalet.models;
 
 namespace gissatalet.views
 {
@@ -11,7 +6,7 @@ namespace gissatalet.views
     {
         public static void MainTask()
         {
-            models.Titel.MainTask(Strings.Localization("TitleMain"));
+            Titel.MainTask(Strings.Localization("TitleMain"));
             Menu.MainTask();
             string makeAMove = Strings.Localization("MakeAMove");
             SetCursor.SetXandWrite(makeAMove, 5);

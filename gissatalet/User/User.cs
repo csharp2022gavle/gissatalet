@@ -34,7 +34,7 @@ namespace gissatalet.user
 
         public User(string name, int score, int tries)
         {
-            this.Id = ObjectId.GenerateNewId();
+            Id = ObjectId.GenerateNewId();
             Name = name;
             Score = score;
             Tries = tries;
